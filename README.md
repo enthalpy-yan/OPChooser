@@ -1,6 +1,12 @@
-FE545-FinalProject
-==================
+#FE545-FinalProject
 
-This is the final project for FE545
+## About
+This is a final project for FE545: Design Patterns and Derivatives Pricing. 
 
-gcc test.c \`/usr/bin/curl-config --cflags\` \`/usr/bin/curl-config --libs\` -o test.o
+##How to build this app
+
+## Dependencies
+- [libcurl][]
+- [gtest][] for development
+
+
