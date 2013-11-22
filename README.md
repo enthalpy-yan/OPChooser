@@ -3,9 +3,13 @@
 ## About
 This is a final project for FE545: Design Patterns and Derivatives Pricing. 
 
-##How to build this app
+## Build
+Under the root directory, using [make](http://unixhelp.ed.ac.uk/CGI/man-cgi?make) command will build whole project automatically.
+```
+$ make
+```
 
 ## Dependencies
-- [libcurl][http://curl.haxx.se/libcurl/]
+- [libcurl](http://curl.haxx.se/libcurl/)
 
 
