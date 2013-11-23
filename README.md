@@ -11,5 +11,6 @@ $ make
 
 ## Dependencies
 - [libcurl](http://curl.haxx.se/libcurl/)
+- [jansson](http://www.digip.org/jansson/)
 
 
