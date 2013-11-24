@@ -20,8 +20,8 @@ $ make
 option {
   String stockName;
   double strikePrice;
-  double stockPrice;
-  double optionPrice;
+  double purchasePrice;
+  double optionPrice; (ask)
   Type optionType;
   date purchaseDate;
   date expirationDate;
