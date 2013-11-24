@@ -11,7 +11,7 @@ $ make
 
 ## Dependencies
 - [libcurl](http://curl.haxx.se/libcurl/)
-- [jansson](http://www.digip.org/jansson/)
+- [jsoncpp](http://jsoncpp.sourceforge.net/)
 
 
 ## Option structure
