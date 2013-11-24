@@ -14,3 +14,19 @@ $ make
 - [jansson](http://www.digip.org/jansson/)
 
 
+## Option structure
+
+```
+option {
+  String stockName;
+  double strikePrice;
+  double stockPrice;
+  double optionPrice;
+  Type optionType;
+  date purchaseDate;
+  date expirationDate;
+}
+
+```
+
+
