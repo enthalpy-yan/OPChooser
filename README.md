@@ -26,7 +26,6 @@ option {
   date purchaseDate;
   date expirationDate;
 }
-
 ```
 
 
