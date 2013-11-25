@@ -2,6 +2,7 @@
 #define __OPTION_H_INCLUDED__
 #include <iostream>
 #include <string>
+#include <boost/date_time/gregorian/gregorian.hpp>
 using namespace std;
 
 enum OptionType { CALL, PUT };
@@ -12,9 +13,8 @@ class Option {
 	double purchasePrice;
 	double optionPrice;	// ask
 	OptionType optionType;
-	string purchaseDate;
-	string expirationDate;
-
+	boost::gregorian::date purchaseDate;
+	boost::gregorian::date expirationDate;
 
 public:
 	Option();

@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cstdio>
-#include <cstring>
+#include <string>
 #include <json/json.h>
+#include <boost/date_time/gregorian/gregorian.hpp>
 
 #include "restclient.h"
 #include "myAppHelper.h"
@@ -18,17 +19,23 @@ int main() {
 
     OptionFactory *optionFactory = new OptionFactory();
 
-    Option &p1 = optionFactory->createOption("111111");
+    Option &p1 = optionFactory->createOption("111111", "11", 1,1,1, PUT, "20131010", "20131010");
     Option &p2 = optionFactory->createOption("222222");
 
     OptionCollection optionList;
 
-    optionList.addOption(Option(p1));
-    optionList.addOption(Option(p2));
+    optionList.addOption(p1);
+    optionList.addOption(p2);
 
     IOptionIterator *iter = optionList.getIterator();
 
-    for (Option s = iter->firstOption(); iter->isDone() == false; s = iter->nextOption() ) {
+    for ( Option s = iter->firstOption(); iter->isDone() == false; s = iter->nextOption() ) {
         std::cout << s << std::endl;
     }
+
+    std::string s("20131009");
+    boost::gregorian::date d(boost::gregorian::from_undelimited_string(s));
+    std::cout << boost::gregorian::to_iso_extended_string(d) << std::endl;
+
+    return 0;
 }

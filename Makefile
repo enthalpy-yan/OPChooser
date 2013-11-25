@@ -2,7 +2,7 @@ CC=g++
 INCLUDE=-I./include
 SOURCEDIR=./source
 CFLAGS=-c -Wall 
-LDFLAGS=`/usr/bin/curl-config --cflags` `/usr/bin/curl-config --libs` -ljsoncpp
+LDFLAGS=`/usr/bin/curl-config --cflags` `/usr/bin/curl-config --libs` -ljsoncpp -lboost_date_time-mt
 SOURCES=$(wildcard $(SOURCEDIR)/*.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=finalProject

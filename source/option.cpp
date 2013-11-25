@@ -73,17 +73,27 @@ OptionType Option::getOptionType() {
 }
 
 void Option::setPurchaseDate(string purchaseDate) {
-	this->purchaseDate = purchaseDate;
+	try {
+		boost::gregorian::date d(boost::gregorian::from_undelimited_string(purchaseDate));
+		this->purchaseDate = d;
+    } catch (std::exception& e) {
+     	std::cout << "Exception: " <<  e.what() << std::endl;
+    }
 }
 
 string Option::getPurchaseDate() {
-	return this->purchaseDate;
+	return boost::gregorian::to_iso_extended_string(this->purchaseDate);
 }
 
 void Option::setExpirationDate(string expirationDate) {
-	this->expirationDate = expirationDate;
+	try {
+		boost::gregorian::date d(boost::gregorian::from_undelimited_string(expirationDate));
+		this->expirationDate = d;
+    } catch (std::exception& e) {
+     	std::cout << "Exception: " <<  e.what() << std::endl;
+    }
 }
 
 string Option::getExpirationDate() {
-	return this->expirationDate;
+	return boost::gregorian::to_iso_extended_string(this->expirationDate);
 }
