@@ -1,9 +1,9 @@
 CC=g++
 SOURCEDIR=./source
 CFLAGS=-c -Wall
-LDFLAGS=`/usr/bin/curl-config --cflags` `/usr/bin/curl-config --libs`
-SOURCES=$(wildcard $(SOURCEDIR)/*.cc)
-OBJECTS=$(SOURCES:.cc=.o)
+LDFLAGS=`/usr/bin/curl-config --cflags` `/usr/bin/curl-config --libs` -ljsoncpp
+SOURCES=$(wildcard $(SOURCEDIR)/*.cpp)
+OBJECTS=$(SOURCES:.pp=.o)
 EXECUTABLE=finalProject
 
 all: $(SOURCES) $(EXECUTABLE)
