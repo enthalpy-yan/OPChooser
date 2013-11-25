@@ -28,4 +28,9 @@ option {
 }
 ```
 
+##note
+
+http://finance.google.com/finance/info?client=ig&q=
+
+For current stock price, use this simple google finance api. 
 
