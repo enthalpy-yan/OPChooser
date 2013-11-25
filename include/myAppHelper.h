@@ -1,3 +1,6 @@
+/**
+ * singleton pattern
+ */
 #ifndef _STOCK_PRICE_HELPER_H_
 #define _STOCK_PRICE_HELPER_H_
 

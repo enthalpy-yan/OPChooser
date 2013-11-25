@@ -1,5 +1,12 @@
 #include "../include/optionFactory.h"
 
+OptionFactory::OptionFactory() {}
+
+Option& OptionFactory::createOption(string stockName) {
+    Option *p = new Option(stockName);
+    return *p;
+}
+
 Option& OptionFactory::createOption(string stockName, string optionSymbol, double strikePrice, 
     double purchasePrice, double optionPrice, OptionType optionType, string purchaseDate, string expirationDate) {
     Option *p = new Option(stockName);

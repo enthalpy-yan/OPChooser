@@ -1,10 +1,15 @@
+/**
+ * factory pattern
+ */
 #ifndef _OPTION_FACTORY_H_
 #define _OPTION_FACTORY_H_
 
-#include "../include/ioptionFactory.h"
+#include "../include/option.h"
 
-class OptionFactory: IOptionFactory {
+class OptionFactory {
 public:
+    OptionFactory();
+    Option& createOption(string stockName);
     Option& createOption(string stockName, 
                         string optionSymbol, 
                         double strikePrice, 
