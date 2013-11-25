@@ -91,7 +91,7 @@ std::string MyAppHelper::getOptions(string stockSymbol, string expDate) {
     yqlQuery.replace(yqlQuery.find("[o_name]"), 8, stockSymbol);
     yqlQuery.replace(yqlQuery.find("[o_exp_date]"), 12, expDate);
     
-    cout << yqlQuery << endl;
+    // cout << yqlQuery << endl;
 
     cout << curl_escape(yqlQuery.c_str(), yqlQuery.size()) << endl;
 
