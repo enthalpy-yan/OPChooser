@@ -12,6 +12,7 @@ $ make
 ## Dependencies
 - [libcurl](http://curl.haxx.se/libcurl/)
 - [jsoncpp](http://jsoncpp.sourceforge.net/)
+- [boost](http://www.boost.org)
 
 
 ## Option Model
@@ -25,8 +26,8 @@ class Option {
 	double purchasePrice;
 	double optionPrice;	// ask
 	OptionType optionType;
-	string purchaseDate;
-	string expirationDate;
+	boost::gregorian::date purchaseDate;
+	boost::gregorian::date expirationDate;
 }
 ```
 
