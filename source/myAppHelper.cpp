@@ -60,6 +60,6 @@ double MyAppHelper::getStockPrice(const std::string& stockName) {
     if (not stockPrice.isNull()) {
         return MyAppHelper::s_to_d(stockPrice.asString());
     } else {
-      exit(1);
+        exit(1);
     }
 }
