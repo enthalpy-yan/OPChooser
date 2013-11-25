@@ -19,6 +19,14 @@ string Option::getStockName(){
 	return this->stockName;
 }
 
+void Option::setOptionSymbol(string optionSymbol){
+	this->optionSymbol = optionSymbol;
+}
+
+string Option::getOptionSymbol(){
+	return this->optionSymbol;
+}
+
 void Option::setStrikePrice(double strikePrice){
 	this->strikePrice = strikePrice;
 }

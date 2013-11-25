@@ -6,6 +6,7 @@ using namespace std;
 enum OptionType { CALL, PUT };
 class Option {
 	string stockName;
+	string optionSymbol;
 	double strikePrice;
 	double purchasePrice;
 	double optionPrice;	// ask
@@ -21,6 +22,8 @@ public:
 
 	void setStockName(string stockName);
 	string getStockName();
+	void setOptionSymbol(string optionSymbol);
+	string getOptionSymbol();
 	void setStrikePrice(double strikePrice);
 	double getStrikePrice();
 	void setPurchasePrice(double purchasePrice);
