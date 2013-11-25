@@ -14,17 +14,19 @@ $ make
 - [jsoncpp](http://jsoncpp.sourceforge.net/)
 
 
-## Option structure
+## Option Model
 
 ```
-option {
-  String stockName;
-  double strikePrice;
-  double purchasePrice;
-  double optionPrice; (ask)
-  Type optionType;
-  date purchaseDate;
-  date expirationDate;
+enum OptionType { CALL, PUT };
+class Option {
+	string stockName;
+	string optionSymbol;
+	double strikePrice;
+	double purchasePrice;
+	double optionPrice;	// ask
+	OptionType optionType;
+	string purchaseDate;
+	string expirationDate;
 }
 ```
 
