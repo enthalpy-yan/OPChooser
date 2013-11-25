@@ -14,7 +14,7 @@ $ make
 - [jsoncpp](http://jsoncpp.sourceforge.net/)
 
 
-## Option structure
+## Option Model
 
 ```
 enum OptionType { CALL, PUT };
