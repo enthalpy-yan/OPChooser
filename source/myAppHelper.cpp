@@ -1,11 +1,25 @@
-#include "../include/stockPriceHelper.h"
+#include "../include/myAppHelper.h"
 
-const std::string StockPriceHelper::PREFIXURL = "http://finance.google.com/finance/info?client=ig&q=";
+const std::string MyAppHelper::PREFIXURL = "http://finance.google.com/finance/info?client=ig&q=";
+
+bool MyAppHelper::instanceFlag = false;
+
+MyAppHelper* MyAppHelper::single = NULL;
+
+MyAppHelper& MyAppHelper::getInstance() {
+    if(!instanceFlag) {
+        single = new MyAppHelper();
+        instanceFlag = true;
+        return *single;
+    } else {
+        return *single;
+    }
+}
 
 /**
  * Convert string to double
  */
-double StockPriceHelper::s_to_d(const std::string& strPrice) {
+double MyAppHelper::s_to_d(const std::string& strPrice) {
     return std::atof(strPrice.c_str());
 }
 
@@ -14,7 +28,7 @@ double StockPriceHelper::s_to_d(const std::string& strPrice) {
  * @param  stockName name of the stock
  * @return stock price
  */
-double StockPriceHelper::getPrice(const std::string& stockName) {
+double MyAppHelper::getStockPrice(const std::string& stockName) {
     std::string targetUrl = PREFIXURL;
     targetUrl.append(stockName);
     //Send a http request.
@@ -44,7 +58,7 @@ double StockPriceHelper::getPrice(const std::string& stockName) {
     const Json::Value stockPrice = root["l_fix"];
 
     if (not stockPrice.isNull()) {
-        return StockPriceHelper::s_to_d(stockPrice.asString());
+        return MyAppHelper::s_to_d(stockPrice.asString());
     } else {
       exit(1);
     }
