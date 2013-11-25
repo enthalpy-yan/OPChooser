@@ -12,6 +12,7 @@ $ make
 ## Dependencies
 - [libcurl](http://curl.haxx.se/libcurl/)
 - [jsoncpp](http://jsoncpp.sourceforge.net/)
+- [boost](http://www.boost.org)
 
 
 ## Option Model
