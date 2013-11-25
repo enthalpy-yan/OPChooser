@@ -26,8 +26,8 @@ class Option {
 	double purchasePrice;
 	double optionPrice;	// ask
 	OptionType optionType;
-	string purchaseDate;
-	string expirationDate;
+	boost::gregorian::date purchaseDate;
+	boost::gregorian::date expirationDate;
 }
 ```
 
