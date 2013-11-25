@@ -16,5 +16,5 @@ $(EXECUTABLE): $(OBJECTS)
 
 clean:  
 	rm -rf $(SOURCEDIR)/*.o
-	rm finalProject
+	rm $(EXECUTABLE)
 
