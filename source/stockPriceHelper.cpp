@@ -46,6 +46,6 @@ double StockPriceHelper::getPrice(const std::string& stockName) {
     if (not stockPrice.isNull()) {
         return StockPriceHelper::s_to_d(stockPrice.asString());
     } else {
-      exit(1);
+        exit(1);
     }
 }
