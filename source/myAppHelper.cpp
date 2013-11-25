@@ -31,6 +31,18 @@ double MyAppHelper::s_to_d(const std::string& strPrice) {
 }
 
 /**
+ * Retrieve date info from stock symbol. e.g. MSFT131227P00038000 -> 20131227
+ * @param  stockSymbol 
+ * @return date
+ */
+std::string MyAppHelper::getDateFromSymbol(std::string stockName, std::string optionSymbol) {
+    int pos = stockName.size();
+    std::string rawDateStr = optionSymbol.substr(pos, 6);
+    rawDateStr.insert(0, "20");
+    return rawDateStr;
+}
+
+/**
  * Send http request to the target url and get the response.
  * @param  url 
  * @return response strings
@@ -61,7 +73,7 @@ double MyAppHelper::getStockPrice(const std::string& stockName) {
 
     if (not parsedSuccess) {
         // report to the user the failure and their locations in the document.
-        std::cout << "Failed to parse JSON" << std::endl << reader.getFormatedErrorMessages() << std::endl;
+        std::cout << "Failed to parse Stock JSON" << std::endl << reader.getFormatedErrorMessages() << std::endl;
         exit(1);
     }
 
@@ -91,9 +103,9 @@ std::string MyAppHelper::getOptions(string stockSymbol, string expDate) {
     yqlQuery.replace(yqlQuery.find("[o_name]"), 8, stockSymbol);
     yqlQuery.replace(yqlQuery.find("[o_exp_date]"), 12, expDate);
     
-    // cout << yqlQuery << endl;
+    //cout << yqlQuery << endl;
 
-    cout << curl_escape(yqlQuery.c_str(), yqlQuery.size()) << endl;
+    //cout << curl_escape(yqlQuery.c_str(), yqlQuery.size()) << endl;
 
     string request(MyAppHelper::YAHOO_YQL_API_PREFIXURL);
     request.append(curl_escape(yqlQuery.c_str(), yqlQuery.size()));
@@ -102,6 +114,73 @@ std::string MyAppHelper::getOptions(string stockSymbol, string expDate) {
         MyAppHelper::YAHOO_YQL_API_SUFFIX.size()));
 
     return appHelper.httpGetRequest(request);
+}
+
+/**
+ * Retrieve all options from json string by option type and save them into a option collection.
+ * @param  jsonString response string from yahoo yql web service. 
+ * @return 
+ */
+OptionCollection MyAppHelper::getOptionListByOptionType(std::string stockName, std::string expDate, OptionType otype) {
+    OptionCollection optionList;
+    OptionFactory *optionFactory = new OptionFactory();
+    Json::Value root; //will contains the root value(json object) after parsing.
+    Json::Reader reader;
+
+    std::string jsonString = getOptions(stockName, expDate);
+    double currentStockPrice = getStockPrice(stockName);
+    boost::gregorian::date cDate(boost::gregorian::day_clock::local_day());
+    std::string currentDate = boost::gregorian::to_iso_extended_string(cDate);
+
+    bool parsedSuccess = reader.parse(jsonString, root, false);
+
+    if (not parsedSuccess) {
+        // report to the user the failure and their locations in the document.
+        std::cout << "Failed to parse Option JSON" << std::endl << reader.getFormatedErrorMessages() << std::endl;
+        exit(1);
+    }
+
+    const Json::Value optionsChain = root["query"]["results"]["optionsChain"];
+
+    if (not optionsChain.isNull()) {
+        for (unsigned int index = 0; index < optionsChain.size(); index++) {
+            const Json::Value optionSymbol = optionsChain[index]["option"]["symbol"];
+            const Json::Value optionType = optionsChain[index]["option"]["type"];
+            if (otype == PUT) {
+                if (optionType.asString() == "P") {
+                    const Json::Value optionSymbol = optionsChain[index]["option"]["symbol"];
+                    std::string oSymbol = optionSymbol.asString();
+                    const Json::Value optionStrikePrice = optionsChain[index]["option"]["strikePrice"];
+                    double oStrikePrice = s_to_d(optionStrikePrice.asString());
+                    const Json::Value optionPrice = optionsChain[index]["option"]["ask"];
+                    double oPrice = s_to_d(optionPrice.asString());
+                    std::string oExpirationDate= getDateFromSymbol(stockName, oSymbol);
+                    Option &p = optionFactory->createOption(stockName, oSymbol, oStrikePrice, 
+                                                            currentStockPrice, oPrice, PUT, currentDate, 
+                                                            oExpirationDate);
+                    optionList.addOption(p);
+                }
+            } else if (otype == CALL) {
+                if (optionType.asString() == "C") {
+                    const Json::Value optionSymbol = optionsChain[index]["option"]["symbol"];
+                    std::string oSymbol = optionSymbol.asString();
+                    const Json::Value optionStrikePrice = optionsChain[index]["option"]["strikePrice"];
+                    double oStrikePrice = s_to_d(optionStrikePrice.asString());
+                    const Json::Value optionPrice = optionsChain[index]["option"]["ask"];
+                    double oPrice = s_to_d(optionPrice.asString());
+                    std::string oExpirationDate= getDateFromSymbol(stockName, oSymbol);
+                    Option &p = optionFactory->createOption(stockName, oSymbol, oStrikePrice, 
+                                                            currentStockPrice, oPrice, CALL, currentDate, 
+                                                            oExpirationDate);
+                    optionList.addOption(p);
+                }
+            }
+        }
+        
+        return optionList;
+    } else {
+        exit(1);
+    }
 }
 
 
