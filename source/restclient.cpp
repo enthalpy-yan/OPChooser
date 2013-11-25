@@ -8,12 +8,12 @@
 /*========================
          INCLUDES
   ========================*/
-#include "../include/restclient.h"
-
 #include <cstring>
 #include <string>
 #include <iostream>
 #include <map>
+
+#include "restclient.h"
 
 /** initialize user agent string */
 const char* RestClient::user_agent = "restclient-cpp/"; 

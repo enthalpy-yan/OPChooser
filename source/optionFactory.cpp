@@ -1,4 +1,4 @@
-#include "../include/optionFactory.h"
+#include "optionFactory.h"
 
 OptionFactory::OptionFactory() {}
 

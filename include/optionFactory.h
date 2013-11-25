@@ -4,7 +4,7 @@
 #ifndef _OPTION_FACTORY_H_
 #define _OPTION_FACTORY_H_
 
-#include "../include/option.h"
+#include "option.h"
 
 class OptionFactory {
 public:

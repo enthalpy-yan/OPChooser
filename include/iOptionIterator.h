@@ -4,7 +4,7 @@
 #ifndef _I_OPTION_ITERATOR_
 #define _I_OPTION_ITERATOR_
 
-#include "../include/option.h"
+#include "option.h"
 
 /**
  *  Interface for option iterator.
@@ -12,10 +12,10 @@
 class IOptionIterator {
 
 public:
-    virtual Option FirstOption() = 0;
-    virtual Option NextOption() = 0;
-    virtual Option CurrentOption() = 0;
-    virtual bool IsDone() = 0;    
+    virtual Option firstOption() = 0;
+    virtual Option nextOption() = 0; 
+    virtual Option currentOption() = 0;
+    virtual bool isDone() = 0;    
 };
 
 #endif

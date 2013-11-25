@@ -1,18 +1,18 @@
-#include "../include/OptionIterator.h"
+#include "optionIterator.h"
 
 OptionIterator::OptionIterator(IOptionCollection *oc) {
     this->optionCollection = oc;
     this->currentIndex_ = 0;
 }
 
-Option OptionIterator::FirstOption() {
+Option OptionIterator::firstOption() {
     currentIndex_ = 0;
     return (*optionCollection)[currentIndex_];
 }
 
-Option OptionIterator::NextOption() {
+Option OptionIterator::nextOption() {
     currentIndex_ += 1;
-    if (IsDone() == false) {
+    if (isDone() == false) {
         return (*optionCollection)[currentIndex_];
     } else {
         Option o;
@@ -20,12 +20,12 @@ Option OptionIterator::NextOption() {
     }
 }
 
-Option OptionIterator::CurrentOption() {
+Option OptionIterator::currentOption() {
     return (*optionCollection)[currentIndex_];
 }
 
-bool OptionIterator::IsDone() {
-    if (currentIndex_ < optionCollection->Count()) {
+bool OptionIterator::isDone() {
+    if (currentIndex_ < optionCollection->count()) {
         return false;
     }
     return true;

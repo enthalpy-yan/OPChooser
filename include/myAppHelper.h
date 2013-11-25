@@ -8,10 +8,12 @@
 #include <cstdio>
 #include <string>
 #include <vector>
+#include <json/json.h>
 
-#include "../include/restclient.h"
-#include "json/json.h"
-#include "../include/option.h"
+#include "restclient.h"
+#include "option.h"
+#include "optionCollection.h"
+#include "optionFactory.h"
 
 /**
  *  Utility functions wrapper for my application.
@@ -32,7 +34,8 @@ public:
         instanceFlag = false; 
     }
     std::string httpGetRequest(const std::string& url); 
-    std::string getOptions(string stockSymbol, string expDate);
+    std::string getOptions(std::string stockSymbol, std::string expDate);
+    OptionCollection getOptionList(std::string& jsonString);
     double getStockPrice(const std::string& stockName);
     double s_to_d(const std::string& strPrice);
 };

@@ -4,9 +4,9 @@
 #ifndef _OPTION_ITERATOR_H_
 #define _OPTION_ITERATOR_H_
 
-#include "../include/iOptionIterator.h"
-#include "../include/iOptionCollection.h"
-#include "../include/optionCollection.h"
+#include "iOptionIterator.h"
+#include "iOptionCollection.h"
+#include "optionCollection.h"
 
 /**
  * Concrete iterator for traversing option collection.
@@ -18,13 +18,13 @@ class OptionIterator : public IOptionIterator {
 public:
     OptionIterator(IOptionCollection *oc);
   
-    Option FirstOption();
+    Option firstOption();
   
-    Option NextOption();
+    Option nextOption();
 
-    Option CurrentOption();
+    Option currentOption();
 
-    bool IsDone();
+    bool isDone();
 };
 
 #endif

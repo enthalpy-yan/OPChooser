@@ -7,9 +7,9 @@
 #include <iostream>
 #include <vector>
 
-#include "../include/iOptionCollection.h"
-#include "../include/option.h"
-#include "../include/OptionIterator.h"
+#include "iOptionCollection.h"
+#include "option.h"
+#include "OptionIterator.h"
 
 /**
  * Concrete Collection Object for saving option data.
@@ -21,9 +21,9 @@ public:
 
     OptionCollection(void) {}
     void addOption(Option option); //add new option to option list.
-    IOptionIterator* GetIterator(); //retrieve option iterator from current option list.
+    IOptionIterator* getIterator(); //retrieve option iterator from current option list.
     Option& operator[](int itemIndex); //get option with the given index.
-    int Count();
+    int count();
 };
 
 #endif

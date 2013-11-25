@@ -1,5 +1,6 @@
 #ifndef __OPTION_H_INCLUDED__
 #define __OPTION_H_INCLUDED__
+#include <iostream>
 #include <string>
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
 	Option();
 	Option(string stockName);
 	~Option();
+	friend ostream& operator<<(ostream& os, const Option& option);
 
 	void setStockName(string stockName);
 	string getStockName();

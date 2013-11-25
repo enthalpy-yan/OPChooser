@@ -8,11 +8,11 @@
 #ifndef INCLUDE_RESTCLIENT_H_
 #define INCLUDE_RESTCLIENT_H_
 
-#include <curl/curl.h>
 #include <string>
 #include <map>
 #include <cstdlib>
 #include <algorithm>
+#include <curl/curl.h>
 
 class RestClient
 {

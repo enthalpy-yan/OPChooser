@@ -1,4 +1,4 @@
-#include "../include/myAppHelper.h"
+#include "myAppHelper.h"
 
 const std::string MyAppHelper::GOOGLE_API_PREFIXURL 
     = "http://finance.google.com/finance/info?client=ig&q=";
@@ -103,6 +103,7 @@ std::string MyAppHelper::getOptions(string stockSymbol, string expDate) {
 
     return appHelper.httpGetRequest(request);
 }
+
 
 
 

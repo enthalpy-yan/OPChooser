@@ -1,13 +1,10 @@
 #include <iostream>
 #include <cstdio>
 #include <cstring>
+#include <json/json.h>
 
-#include "../include/restclient.h"
-#include "../include/myAppHelper.h"
-#include "../include/optionCollection.h"
-#include "../include/option.h"
-#include "../include/optionFactory.h"
-#include "json/json.h"
+#include "restclient.h"
+#include "myAppHelper.h"
 
 using namespace std;
 
@@ -29,9 +26,9 @@ int main() {
     optionList.addOption(Option(p1));
     optionList.addOption(Option(p2));
 
-    IOptionIterator *iter = optionList.GetIterator();
+    IOptionIterator *iter = optionList.getIterator();
 
-    for (Option s = iter->FirstOption(); iter->IsDone() == false; s = iter->NextOption() ) {
-        std::cout << s.getStockName() << std::endl;
+    for (Option s = iter->firstOption(); iter->isDone() == false; s = iter->nextOption() ) {
+        std::cout << s << std::endl;
     }
 }
