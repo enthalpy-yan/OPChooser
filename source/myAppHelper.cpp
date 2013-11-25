@@ -24,6 +24,16 @@ double MyAppHelper::s_to_d(const std::string& strPrice) {
 }
 
 /**
+ * Send http request to the target url and get the response.
+ * @param  url 
+ * @return response strings
+ */
+std::string MyAppHelper::httpGetRequest(const std::string& url) {
+    RestClient::response r = RestClient::get(url);
+    return r.body;
+}
+
+/**
  * Retrieve real time stock price.
  * @param  stockName name of the stock
  * @return stock price
@@ -31,10 +41,7 @@ double MyAppHelper::s_to_d(const std::string& strPrice) {
 double MyAppHelper::getStockPrice(const std::string& stockName) {
     std::string targetUrl = PREFIXURL;
     targetUrl.append(stockName);
-    //Send a http request.
-    RestClient::response r = RestClient::get(targetUrl);
-    //Get the http response.
-    std::string responseJson = r.body;
+    std::string responseJson = httpGetRequest(targetUrl);
 
 
     //trim stock data in order to fit in json object.

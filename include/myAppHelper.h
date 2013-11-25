@@ -23,6 +23,7 @@ public:
     ~MyAppHelper() { 
       instanceFlag = false; 
     }
+    std::string httpGetRequest(const std::string& url); 
     double getStockPrice(const std::string& stockName);
     double s_to_d(const std::string& strPrice);
 
