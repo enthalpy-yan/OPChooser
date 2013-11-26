@@ -12,19 +12,19 @@
  * Concrete iterator for traversing option collection.
  */
 class OptionIterator : public IOptionIterator {
-    IOptionCollection *optionCollection;
-    int currentIndex_;
+  IOptionCollection *optionCollection;
+  int currentIndex_;
 
 public:
-    OptionIterator(IOptionCollection *oc);
-  
-    Option firstOption();
-  
-    Option nextOption();
+  OptionIterator(IOptionCollection *oc);
 
-    Option currentOption();
+  Option firstOption();
 
-    bool isDone();
+  Option nextOption();
+
+  Option currentOption();
+
+  bool isDone();
 };
 
 #endif

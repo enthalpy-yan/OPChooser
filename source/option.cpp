@@ -12,15 +12,15 @@ Option::~Option(){
 }
 
 ostream& operator<<(ostream& os, const Option& option) {
-    os << "{ " << "stockName: " << option.stockName << ", "
-	   << "optionSymbol: "     << option.optionSymbol << ", "
-	   << "strikePrice: "      << option.strikePrice << ", "
-	   << "purchasePrice: "    << option.purchasePrice << ", "
-	   << "optionPrice: "      << option.optionPrice << ", "
-	   << "optionType: "       << option.optionType << ", "
-	   << "purchaseDate: "     << option.purchaseDate << ", "
-	   << "expirationDate: "   << option.expirationDate << " }";
-    return os;
+  os << "{ " << "stockName: " << option.stockName      << ", "
+     << "optionSymbol: "      << option.optionSymbol   << ", "
+     << "strikePrice: "       << option.strikePrice    << ", "
+     << "purchasePrice: "     << option.purchasePrice  << ", "
+     << "optionPrice: "       << option.optionPrice    << ", "
+     << "optionType: "        << option.optionType     << ", "
+     << "purchaseDate: "      << option.purchaseDate   << ", "
+     << "expirationDate: "    << option.expirationDate << " }";
+  return os;
 }
 
 void Option::setStockName(string stockName) {

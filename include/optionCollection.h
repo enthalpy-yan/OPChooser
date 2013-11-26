@@ -15,15 +15,15 @@
  * Concrete Collection Object for saving option data.
  */
 class OptionCollection : public IOptionCollection {
-    std::vector<Option> options_;
+  std::vector<Option> options_;
 
 public:
 
-    OptionCollection(void) {}
-    void addOption(Option option); //add new option to option list.
-    IOptionIterator* getIterator(); //retrieve option iterator from current option list.
-    Option& operator[](int itemIndex); //get option with the given index.
-    int count();
+  OptionCollection(void) {}
+  void addOption(Option option); //add new option to option list.
+  IOptionIterator* getIterator(); //retrieve option iterator from current option list.
+  Option& operator[](int itemIndex); //get option with the given index.
+  int count();
 };
 
 #endif

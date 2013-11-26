@@ -13,9 +13,9 @@
 class IOptionCollection {
 
 public:
-    virtual IOptionIterator* getIterator() = 0;
-    virtual Option& operator[](int itemIndex) = 0;
-    virtual int count() = 0;
+  virtual IOptionIterator* getIterator() = 0;
+  virtual Option& operator[](int itemIndex) = 0;
+  virtual int count() = 0;
 };
 
 #endif

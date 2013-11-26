@@ -12,10 +12,10 @@
 class IOptionIterator {
 
 public:
-    virtual Option firstOption() = 0;
-    virtual Option nextOption() = 0; 
-    virtual Option currentOption() = 0;
-    virtual bool isDone() = 0;    
+  virtual Option firstOption() = 0;
+  virtual Option nextOption() = 0; 
+  virtual Option currentOption() = 0;
+  virtual bool isDone() = 0;    
 };
 
 #endif
