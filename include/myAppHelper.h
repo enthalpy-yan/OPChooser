@@ -29,7 +29,7 @@ private:
     static bool instanceFlag;
     static MyAppHelper *single;
     std::string getOptions(std::string stockSymbol, std::string expDate);
-    std::string getDateFromSymbol(std::string stockName, std::string stockSymbol);
+    std::string getDateFromSymbol(std::string optionSymbol, std::string type);
 public:
     static MyAppHelper& getInstance();
     ~MyAppHelper() { 

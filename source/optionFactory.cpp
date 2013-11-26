@@ -15,7 +15,7 @@ Option& OptionFactory::createOption(string stockName, string optionSymbol, doubl
     p->setPurchasePrice(purchasePrice);
     p->setOptionPrice(optionPrice);
     p->setOptionType(optionType);
-    p->setPurchaseDate(expirationDate);
+    p->setPurchaseDate(purchaseDate);
     p->setExpirationDate(expirationDate);
     return *p;
 }

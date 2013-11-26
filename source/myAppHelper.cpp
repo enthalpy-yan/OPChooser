@@ -35,9 +35,9 @@ double MyAppHelper::s_to_d(const std::string& strPrice) {
  * @param  stockSymbol 
  * @return date
  */
-std::string MyAppHelper::getDateFromSymbol(std::string stockName, std::string optionSymbol) {
-    int pos = stockName.size();
-    std::string rawDateStr = optionSymbol.substr(pos, 6);
+std::string MyAppHelper::getDateFromSymbol(std::string optionSymbol, std::string type) {
+    int index = optionSymbol.find(type);
+    std::string rawDateStr = optionSymbol.substr(index - 6, 6);
     rawDateStr.insert(0, "20");
     return rawDateStr;
 }
@@ -61,7 +61,6 @@ double MyAppHelper::getStockPrice(const std::string& stockName) {
     std::string targetUrl = GOOGLE_API_PREFIXURL;
     targetUrl.append(stockName);
     std::string responseJson = httpGetRequest(targetUrl);
-
 
     //trim stock data in order to fit in json object.
     responseJson.erase(responseJson.begin(), responseJson.begin() + 5);
@@ -130,7 +129,7 @@ OptionCollection MyAppHelper::getOptionListByOptionType(std::string stockName, s
     std::string jsonString = getOptions(stockName, expDate);
     double currentStockPrice = getStockPrice(stockName);
     boost::gregorian::date cDate(boost::gregorian::day_clock::local_day());
-    std::string currentDate = boost::gregorian::to_iso_extended_string(cDate);
+    std::string currentDate = boost::gregorian::to_iso_string(cDate);
 
     bool parsedSuccess = reader.parse(jsonString, root, false);
 
@@ -154,7 +153,7 @@ OptionCollection MyAppHelper::getOptionListByOptionType(std::string stockName, s
                     double oStrikePrice = s_to_d(optionStrikePrice.asString());
                     const Json::Value optionPrice = optionsChain[index]["option"]["ask"];
                     double oPrice = s_to_d(optionPrice.asString());
-                    std::string oExpirationDate= getDateFromSymbol(stockName, oSymbol);
+                    std::string oExpirationDate= getDateFromSymbol(oSymbol, "P");
                     Option &p = optionFactory->createOption(stockName, oSymbol, oStrikePrice, 
                                                             currentStockPrice, oPrice, PUT, currentDate, 
                                                             oExpirationDate);
@@ -168,7 +167,7 @@ OptionCollection MyAppHelper::getOptionListByOptionType(std::string stockName, s
                     double oStrikePrice = s_to_d(optionStrikePrice.asString());
                     const Json::Value optionPrice = optionsChain[index]["option"]["ask"];
                     double oPrice = s_to_d(optionPrice.asString());
-                    std::string oExpirationDate= getDateFromSymbol(stockName, oSymbol);
+                    std::string oExpirationDate= getDateFromSymbol(oSymbol, "C");
                     Option &p = optionFactory->createOption(stockName, oSymbol, oStrikePrice, 
                                                             currentStockPrice, oPrice, CALL, currentDate, 
                                                             oExpirationDate);
