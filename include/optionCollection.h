@@ -9,7 +9,7 @@
 
 #include "iOptionCollection.h"
 #include "option.h"
-#include "OptionIterator.h"
+#include "optionIterator.h"
 
 /**
  * Concrete Collection Object for saving option data.
