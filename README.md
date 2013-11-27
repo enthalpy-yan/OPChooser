@@ -10,9 +10,9 @@ $ make
 ```
 
 ## Dependencies
-- [libcurl](http://curl.haxx.se/libcurl/)
-- [jsoncpp](http://jsoncpp.sourceforge.net/)
-- [boost](http://www.boost.org)
+- [libcurl](http://curl.haxx.se/libcurl/)    (handling http request and response)
+- [jsoncpp](http://jsoncpp.sourceforge.net/) (parsing json format)
+- [boost](http://www.boost.org)              (useful libraries)
 
 
 ## Option Model
