@@ -4,15 +4,15 @@
 This is a final project for FE545: Design Patterns and Derivatives Pricing. 
 
 ## Build
-Under the root directory, using [make](http://unixhelp.ed.ac.uk/CGI/man-cgi?make) command will build whole project automatically.
+Under the root directory
 ```
 $ make
 ```
 
 ## Dependencies
-- [libcurl](http://curl.haxx.se/libcurl/)
-- [jsoncpp](http://jsoncpp.sourceforge.net/)
-- [boost](http://www.boost.org)
+- [libcurl](http://curl.haxx.se/libcurl/)    (handling http request and response)
+- [jsoncpp](http://jsoncpp.sourceforge.net/) (parsing json format)
+- [boost](http://www.boost.org)              (useful libraries)
 
 
 ## Option Model
@@ -31,9 +31,29 @@ class Option {
 }
 ```
 
-##note
+## Overall Directory Structure
 
-http://finance.google.com/finance/info?client=ig&q=
+At a high level, the structure looks roughly like this:
 
-For current stock price, use this simple google finance api. 
-
+```
+FE545-FinalProject/
+  |- include/
+  |  |- iOptionCollection.h    (Interface for Option Collection) 
+  |  |- iOptionIterator.h      (Interface for Option Iterator)
+  |  |- myAppHelper.h          (Header file for Helper class)
+  |  |- option.h               (Header file for Option model class) 
+  |  |- optionCollection.h     (Header file for concreate Option Collection class)
+  |  |- optionFactory.h        (Header file for Option Factory)
+  |  |- optionIterator.h       (Header file for concreate Option Interator class) 
+  |  |- restclient.h           (Header file for RestClient class)
+  |- source/
+  |  |- main.cpp               (Main function)
+  |  |- myAppHelper.cpp        (Implementation for Helper class)
+  |  |- option.cpp             (Implementation for Option class)
+  |  |- optionCollection.cpp   (Implementation for concreate Option Collection class)
+  |  |- optionFactory.cpp      (Implementation for Option Factory class)
+  |  |- optionIterator.cpp     (Implementation for concreate Option Iterator class)
+  |  |- restclient.cpp         (Implementation for RestClient class)
+  |- Makefile                  (Makefile for building this application)
+  |- README.md                 (Readme file for github)
+```
