@@ -80,18 +80,18 @@ class Option {
 
 ##### This is a logger class for logging informations.
 
-- DEBUG_CONF(logfile_name, configuraitons, fileVerbosityLevel, screenVerbosityLevel)
+- LOGGER_CONF(logfile_name, configuraitons, fileVerbosityLevel, screenVerbosityLevel)
 
     Configures the logger.
     ```
 	DEBUG_CONF("outputfile", Logger::file_on|Logger::screen_on, DEBUG_FLAG, ERROR_FLAG) => log debug info in logfile and error info on screen.
 	DEBUG_CONF("", Logger::screen_on, DEBUG_FLAG, DEBUG_FLAG) => log debug info on screen.
     ```
-- DEBUG(log_flag, log_messages)
+- LOGGER(log_flag, log_messages)
 
     Prints log messages.
     ```
-	DEBUG(DEBUG_FLAG, "hello " << "world"); => log message "hello world".
+	LOGGER(DEBUG_FLAG, "hello " << "world"); => log message "hello world".
     ```
 
 ## Overall Directory Structure
