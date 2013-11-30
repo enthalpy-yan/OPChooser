@@ -23,7 +23,7 @@ const int DEBUG_FLAG = 2;
 /**
  * \brief Macro to configure the logger.
  * Example of configuration of the Logger:
- *  DEBUG_CONF("outputfile", Logger::file_on|Logger::screen_on, DBG_DEBUG, DBG_ERROR);
+ *  DEBUG_CONF("outputfile", Logger::file_on|Logger::screen_on, DEBUG_FLAG, ERROR_FLAG);
  */
 #define DEBUG_CONF(outputFile, \
     configuration, \
@@ -38,7 +38,7 @@ const int DEBUG_FLAG = 2;
 /**
  * \brief Macro to print log messages.
  * Example of usage of the Logger:
- *      DEBUG(DBG_DEBUG, "hello " << "world");
+ *      DEBUG(DEBUG_FLAG, "hello " << "world");
  */
 #define DEBUG(priority, msg) { \
   std::ostringstream __debug_stream__; \

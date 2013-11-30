@@ -13,12 +13,11 @@ int main() {
 
   IOptionIterator *iter = optionList.getIterator();
 
-  for ( Option s = iter->firstOption(); iter->isDone() == false; s = iter->nextOption() ) {
-      std::cout << s << std::endl;
+  for ( Option p = iter->firstOption(); iter->isDone() == false; p = iter->nextOption() ) {
+      std::cout << p << std::endl;
   }
 
-  DEBUG_CONF("", Logger::screen_on, DEBUG_FLAG, ERROR_FLAG);
-  DEBUG(ERROR_FLAG, "12312312 " << "world");
+  DEBUG_CONF("", Logger::screen_on, DEBUG_FLAG, DEBUG_FLAG);
   DEBUG(DEBUG_FLAG, "hello " << "world");
 
   return 0;
