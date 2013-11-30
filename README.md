@@ -34,13 +34,6 @@ class Option {
 
 ### Helper Class
 
-- SEND_HTTP_REQUEST(request_url)
-    
-    Returns the response(string) of url given in request_url. Only HTTP GET method.
-    ```
-	SEND_HTTP_REQUEST("http://www.example.org")
-    ```
-
 - GET_STOCK_PRICE(stock_name)
     
     Returns the price of stock given in stock_name.
@@ -54,6 +47,14 @@ class Option {
     ```
 	GET_OPTIONS("GOOG", "2013-12", CALL) => get all of GOOG's option(Type: call, expiration date: before 2013-12).
     ```
+
+- SEND_HTTP_REQUEST(request_url)
+    
+    Returns the response(string) of url given in request_url. Only HTTP GET method.
+    ```
+	SEND_HTTP_REQUEST("http://www.example.org")
+    ```
+
 
 ### Logger Class
 
