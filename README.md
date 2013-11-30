@@ -3,10 +3,11 @@
 ## About
 This is a final project for FE545: Design Patterns and Derivatives Pricing. 
 
-## Build
+## Build and Run
 Under the root directory
 ```
 $ make
+$ ./finalProject
 ```
 
 ## Dependencies
