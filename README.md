@@ -30,9 +30,29 @@ class Option {
 	boost::gregorian::date expirationDate;
 }
 ```
+
 ## API Reference
 
+### OptionCollection
+
+##### This is a strcuture used to save option informations. Basically, it is a std::vector<Option>.
+
+- getIterator()
+    
+   Returns a iterator for the collection.
+   ```
+	OptionCollection optionList = GET_OPTIONS("GOOG", "2013-12", CALL);	
+
+	IOptionIterator *iter = optionList.getIterator();
+
+  	for ( Option p = iter->firstOption(); iter->isDone() == false; p = iter->nextOption() ) {
+		std::cout << p << std::endl;
+  	}
+   ```
+
 ### Helper Class
+
+##### This is a wrapper class for the functions used to get stock/option related informations.
 
 - GET_STOCK_PRICE(stock_name)
     
@@ -57,6 +77,8 @@ class Option {
 
 
 ### Logger Class
+
+##### This is a logger class for logging informations.
 
 - DEBUG_CONF(logfile_name, configuraitons, fileVerbosityLevel, screenVerbosityLevel)
 
