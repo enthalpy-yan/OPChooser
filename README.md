@@ -35,7 +35,7 @@ class Option {
 
 ### OptionCollection
 
-##### This is a strcuture used to save option informations. Basically, it is a std::vector<Option>.
+##### This is a strcuture used to save option informations. Basically, it is a std::vector\<Option\>.
 
 - getIterator()
     
