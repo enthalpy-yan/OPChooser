@@ -14,7 +14,7 @@
 #include "option.h"
 #include "optionCollection.h"
 #include "optionFactory.h"
-
+#include "logger.h"
 
 #define GET_STOCK_PRICE(stockName) MyAppHelper::getInstance().getStockPrice(stockName);
 #define GET_OPTIONS(stockSymbol, \

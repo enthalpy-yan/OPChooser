@@ -25,7 +25,7 @@ const int DEBUG_FLAG = 2;
  * Example of configuration of the Logger:
  *  DEBUG_CONF("outputfile", Logger::file_on|Logger::screen_on, DEBUG_FLAG, ERROR_FLAG);
  */
-#define DEBUG_CONF(outputFile, \
+#define LOGGER_CONF(outputFile, \
     configuration, \
     fileVerbosityLevel, \
     screenVerbosityLevel) { \
@@ -40,7 +40,7 @@ const int DEBUG_FLAG = 2;
  * Example of usage of the Logger:
  *      DEBUG(DEBUG_FLAG, "hello " << "world");
  */
-#define DEBUG(priority, msg) { \
+#define LOGGER(priority, msg) { \
   std::ostringstream __debug_stream__; \
   __debug_stream__ << msg; \
   Logger::getInstance().print(priority, __FILE__, __LINE__, \

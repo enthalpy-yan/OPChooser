@@ -6,6 +6,7 @@
 #include "logger.h"
 
 int main() {
+  LOGGER_CONF("", Logger::screen_on, DEBUG_FLAG, DEBUG_FLAG);
 
   double p1 = GET_STOCK_PRICE("GOOG");
   cout << "Current Price for GOOG is: " << p1 << endl;
@@ -13,12 +14,11 @@ int main() {
 
   IOptionIterator *iter = optionList.getIterator();
 
-  for ( Option p = iter->firstOption(); iter->isDone() == false; p = iter->nextOption() ) {
-      std::cout << p << std::endl;
-  }
+  // for ( Option p = iter->firstOption(); iter->isDone() == false; p = iter->nextOption() ) {
+  //     std::cout << p << std::endl;
+  // }
 
-  DEBUG_CONF("", Logger::screen_on, DEBUG_FLAG, DEBUG_FLAG);
-  DEBUG(DEBUG_FLAG, "hello " << "world");
+  LOGGER(DEBUG_FLAG, "hello " << "world");
 
   return 0;
 }

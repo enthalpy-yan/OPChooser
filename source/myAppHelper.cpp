@@ -94,6 +94,7 @@ double MyAppHelper::getStockPrice(const std::string& stockName) {
  * expDate... 2013-11 or 2013-12 Because the API limitation, we cannot query historical option data.
  */
 std::string MyAppHelper::getOptions(string stockSymbol, string expDate) {
+  LOGGER(DEBUG_FLAG, "Building yql query..");
   MyAppHelper &appHelper = MyAppHelper::getInstance();
 
   string yqlQuery(MyAppHelper::YAHOO_YQL_QUERY);
@@ -101,7 +102,8 @@ std::string MyAppHelper::getOptions(string stockSymbol, string expDate) {
   yqlQuery.replace(yqlQuery.find("[query]"), 7, "option");
   yqlQuery.replace(yqlQuery.find("[o_name]"), 8, stockSymbol);
   yqlQuery.replace(yqlQuery.find("[o_exp_date]"), 12, expDate);
-  
+  LOGGER(DEBUG_FLAG, "Done..");
+  LOGGER(DEBUG_FLAG, "Yql query is " << yqlQuery);
   //cout << yqlQuery << endl;
 
   //cout << curl_escape(yqlQuery.c_str(), yqlQuery.size()) << endl;
