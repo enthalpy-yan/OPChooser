@@ -15,6 +15,17 @@
 #include "optionCollection.h"
 #include "optionFactory.h"
 
+
+#define GET_STOCK_PRICE(stockName) MyAppHelper::getInstance().getStockPrice(stockName);
+#define GET_OPTIONS(stockSymbol, \
+                    expDate, \
+                    otype) \
+                    MyAppHelper::getInstance().getOptionListByOptionType(\
+                      stockSymbol, \
+                      expDate, \
+                      otype); 
+#define SEND_HTTP_REQUEST(url) MyAppHelper::getInstance().httpGetRequest(url);
+
 /**
  *  Utility functions wrapper for my application.
  */
