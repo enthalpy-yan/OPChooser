@@ -30,6 +30,17 @@ class Option {
 	boost::gregorian::date expirationDate;
 }
 ```
+## API Reference
+
+### Helper Class
+
+- GET_STOCK_PRICE()
+- GET_OPTIONS()
+
+### Logger Class
+
+- DEBUG_CONF()
+- DEBUG()
 
 ## Overall Directory Structure
 
