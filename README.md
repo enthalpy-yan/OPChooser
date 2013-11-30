@@ -38,14 +38,14 @@ class Option {
     
     Returns the price of stock given in stock_name.
     ```
-	GET_STOCK_PRICE("GOOG")	 => get the price of GOOG.
+	double price = GET_STOCK_PRICE("GOOG")	 => get the price of GOOG.
     ```
 
 - GET_OPTIONS(stock_name, expiration_date, option_type)
 
     Returns the options list with the given arguments.
     ```
-	GET_OPTIONS("GOOG", "2013-12", CALL) => get all of GOOG's option(Type: call, expiration date: before 2013-12).
+	OptionCollection optionList = GET_OPTIONS("GOOG", "2013-12", CALL) => get all of GOOG's option(Type: call, expiration date: before 2013-12).
     ```
 
 - SEND_HTTP_REQUEST(request_url)
