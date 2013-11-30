@@ -30,25 +30,55 @@ class Option {
 	boost::gregorian::date expirationDate;
 }
 ```
+
 ## API Reference
 
+### OptionCollection
+
+##### This is a strcuture used to save option informations. Basically, it is a std::vector\<Option\>.
+
+- getIterator()
+    
+   Returns a iterator for the collection.
+   ```
+	OptionCollection optionList = GET_OPTIONS("GOOG", "2013-12", CALL);	
+
+	IOptionIterator *iter = optionList.getIterator();
+
+  	for ( Option p = iter->firstOption(); iter->isDone() == false; p = iter->nextOption() ) {
+		std::cout << p << std::endl;
+  	}
+   ```
+
 ### Helper Class
+
+##### This is a wrapper class for the functions used to get stock/option related informations.
 
 - GET_STOCK_PRICE(stock_name)
     
     Returns the price of stock given in stock_name.
     ```
-	GET_STOCK_PRICE("GOOG")	 => get the price of GOOG.
+	double price = GET_STOCK_PRICE("GOOG")	 => get the price of GOOG.
     ```
 
 - GET_OPTIONS(stock_name, expiration_date, option_type)
 
     Returns the options list with the given arguments.
     ```
-	GET_OPTIONS("GOOG", "2013-12", CALL) => get all of GOOG's option(Type: call, expiration date: before 2013-12).
+	OptionCollection optionList = GET_OPTIONS("GOOG", "2013-12", CALL) => get all of GOOG's option(Type: call, expiration date: before 2013-12).
     ```
 
+- SEND_HTTP_REQUEST(request_url)
+    
+    Returns the response(string) of url given in request_url. Only HTTP GET method.
+    ```
+	SEND_HTTP_REQUEST("http://www.example.org")
+    ```
+
+
 ### Logger Class
+
+##### This is a logger class for logging informations.
 
 - DEBUG_CONF(logfile_name, configuraitons, fileVerbosityLevel, screenVerbosityLevel)
 
@@ -79,6 +109,7 @@ FE545-FinalProject/
   |  |- optionFactory.h        (Header file for Option Factory)
   |  |- optionIterator.h       (Header file for concreate Option Interator class) 
   |  |- restclient.h           (Header file for RestClient class)
+  |  |- logger.h               (Header file for Logger class)
   |- source/
   |  |- main.cpp               (Main function)
   |  |- myAppHelper.cpp        (Implementation for Helper class)
@@ -87,6 +118,7 @@ FE545-FinalProject/
   |  |- optionFactory.cpp      (Implementation for Option Factory class)
   |  |- optionIterator.cpp     (Implementation for concreate Option Iterator class)
   |  |- restclient.cpp         (Implementation for RestClient class)
+  |  |- logger.cpp             (Implementation for Logger class)
   |- Makefile                  (Makefile for building this application)
   |- README.md                 (Readme file for github)
 ```
