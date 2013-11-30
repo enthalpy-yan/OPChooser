@@ -87,6 +87,7 @@ FE545-FinalProject/
   |  |- optionFactory.h        (Header file for Option Factory)
   |  |- optionIterator.h       (Header file for concreate Option Interator class) 
   |  |- restclient.h           (Header file for RestClient class)
+  |  |- logger.h               (Header file for Logger class)
   |- source/
   |  |- main.cpp               (Main function)
   |  |- myAppHelper.cpp        (Implementation for Helper class)
@@ -95,6 +96,7 @@ FE545-FinalProject/
   |  |- optionFactory.cpp      (Implementation for Option Factory class)
   |  |- optionIterator.cpp     (Implementation for concreate Option Iterator class)
   |  |- restclient.cpp         (Implementation for RestClient class)
+  |  |- logger.cpp             (Implementation for Logger class)
   |- Makefile                  (Makefile for building this application)
   |- README.md                 (Readme file for github)
 ```
