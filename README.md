@@ -34,13 +34,35 @@ class Option {
 
 ### Helper Class
 
-- GET_STOCK_PRICE()
-- GET_OPTIONS()
+- GET_STOCK_PRICE(stock_name)
+    
+    Returns the price of stock given in stock_name.
+    ```
+	GET_STOCK_PRICE("GOOG")	 => get the price of GOOG.
+    ```
+
+- GET_OPTIONS(stock_name, expiration_date, option_type)
+
+    Returns the options list with the given arguments.
+    ```
+	GET_OPTIONS("GOOG", "2013-12", CALL) => get all of GOOG's option(Type: call, expiration date: before 2013-12).
+    ```
 
 ### Logger Class
 
-- DEBUG_CONF()
-- DEBUG()
+- DEBUG_CONF(logfile_name, configuraitons, fileVerbosityLevel, screenVerbosityLevel)
+
+    Configures the logger.
+    ```
+	DEBUG_CONF("outputfile", Logger::file_on|Logger::screen_on, DEBUG_FLAG, ERROR_FLAG) => log debug info in logfile and error info on screen.
+	DEBUG_CONF("", Logger::screen_on, DEBUG_FLAG, DEBUG_FLAG) => log debug info on screen.
+    ```
+- DEBUG(log_flag, log_messages)
+
+    Prints log messages.
+    ```
+	DEBUG(DEBUG_FLAG, "hello " << "world"); => log message "hello world".
+    ```
 
 ## Overall Directory Structure
 
