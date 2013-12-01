@@ -1,4 +1,4 @@
-#include "optionCollection.h"
+#include "OptionCollection.h"
 
 void OptionCollection::addOption(Option option) {
   options_.push_back(option);

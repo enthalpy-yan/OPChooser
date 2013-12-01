@@ -10,11 +10,11 @@
 #include <vector>
 #include <json/json.h>
 
-#include "restclient.h"
-#include "option.h"
-#include "optionCollection.h"
-#include "optionFactory.h"
-#include "logger.h"
+#include "Restclient.h"
+#include "Option.h"
+#include "OptionCollection.h"
+#include "OptionFactory.h"
+#include "Logger.h"
 
 #define GET_STOCK_PRICE(stockName) MyAppHelper::getInstance().getStockPrice(stockName);
 #define GET_OPTIONS(stockSymbol, \

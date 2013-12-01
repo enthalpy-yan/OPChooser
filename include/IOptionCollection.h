@@ -4,8 +4,8 @@
 #ifndef _I_OPTION_COLLECTION_H_
 #define _I_OPTION_COLLECTION_H_
 
-#include "option.h"
-#include "iOptionIterator.h"
+#include "Option.h"
+#include "IOptionIterator.h"
 
 /**
  *  Interface for option collection.

@@ -4,9 +4,9 @@
 #ifndef _OPTION_ITERATOR_H_
 #define _OPTION_ITERATOR_H_
 
-#include "iOptionIterator.h"
-#include "iOptionCollection.h"
-#include "optionCollection.h"
+#include "IOptionIterator.h"
+#include "IOptionCollection.h"
+#include "OptionCollection.h"
 
 /**
  * Concrete iterator for traversing option collection.

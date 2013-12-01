@@ -2,7 +2,8 @@
 #define _OPTION_FILTER_H_
 
 #include <vector>
-#include "myAppHelper.h"
+
+#include "MyAppHelper.h"
 
 class OptionFilter {
 protected:
