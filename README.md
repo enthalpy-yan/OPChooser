@@ -111,6 +111,8 @@ FE545-FinalProject/
   |  |- optionIterator.h       (Header file for concreate Option Interator class) 
   |  |- restclient.h           (Header file for RestClient class)
   |  |- logger.h               (Header file for Logger class)
+  |  |- OptionFilter.h	       (Header file for options filter class)
+  |  |- TemplateOne.h	       (Header file for Template Method class)
   |- source/
   |  |- main.cpp               (Main function)
   |  |- myAppHelper.cpp        (Implementation for Helper class)
@@ -120,6 +122,8 @@ FE545-FinalProject/
   |  |- optionIterator.cpp     (Implementation for concreate Option Iterator class)
   |  |- restclient.cpp         (Implementation for RestClient class)
   |  |- logger.cpp             (Implementation for Logger class)
+  |  |- OptionFilter.cpp       (Implementation for options filter class)
+  |  |- TemplateOne.cpp	       (Implementation for Template Method class)
   |- Makefile                  (Makefile for building this application)
   |- README.md                 (Readme file for github)
 ```
