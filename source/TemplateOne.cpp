@@ -1,6 +1,7 @@
-#include "TemplateOne.h"
-#include "logger.h"
 #include <math.h>
+
+#include "TemplateOne.h"
+#include "Logger.h"
 
 TemplateOne::TemplateOne(OptionCollection occ, OptionCollection ocp){
 	originCall_ = occ;

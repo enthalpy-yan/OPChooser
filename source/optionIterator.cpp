@@ -1,4 +1,4 @@
-#include "optionIterator.h"
+#include "OptionIterator.h"
 
 OptionIterator::OptionIterator(IOptionCollection *oc) {
   this->optionCollection = oc;

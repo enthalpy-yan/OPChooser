@@ -7,9 +7,9 @@
 #include <iostream>
 #include <vector>
 
-#include "iOptionCollection.h"
-#include "option.h"
-#include "optionIterator.h"
+#include "IOptionCollection.h"
+#include "Option.h"
+#include "OptionIterator.h"
 
 /**
  * Concrete Collection Object for saving option data.

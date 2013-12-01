@@ -4,8 +4,8 @@
 #include <boost/program_options.hpp>
 namespace po = boost::program_options;
 
-#include "myAppHelper.h"
-#include "logger.h"
+#include "MyAppHelper.h"
+#include "Logger.h"
 
 int main(int ac, char* av[]) {
   LOGGER_CONF("", Logger::screen_on, ERROR_FLAG, ERROR_FLAG);
@@ -48,7 +48,7 @@ int main(int ac, char* av[]) {
     // }
 
   } catch(exception& e) {
-    LOGGER(ERROR_FLAG, "error: " << e.what());
+    LOGGER(ERROR_FLAG, e.what());
     exit(1);
   } catch(...) {
     LOGGER(ERROR_FLAG, "Exception of unknown type!");

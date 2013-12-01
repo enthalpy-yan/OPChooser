@@ -13,7 +13,7 @@
 #include <iostream>
 #include <map>
 
-#include "restclient.h"
+#include "Restclient.h"
 
 /** initialize user agent string */
 const char* RestClient::user_agent = "restclient-cpp/"; 

@@ -1,10 +1,11 @@
 #ifndef _TEMPLATE_ONE_H_
 #define _TEMPLATE_ONE_H_
 
-#include "OptionFilter.h"
-#include "myAppHelper.h"
-#include "option.h"
 #include <vector>
+
+#include "OptionFilter.h"
+#include "MyAppHelper.h"
+#include "Option.h"
 
 class TemplateOne : public OptionFilter {
 

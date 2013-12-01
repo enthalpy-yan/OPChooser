@@ -4,7 +4,7 @@
 #ifndef _I_OPTION_ITERATOR_
 #define _I_OPTION_ITERATOR_
 
-#include "option.h"
+#include "Option.h"
 
 /**
  *  Interface for option iterator.
