@@ -89,24 +89,15 @@ double MyAppHelper::getStockPrice(const std::string& stockName) {
   }
 }
 
-/**
- * Retrieve all options with the given stock symbol and expiration date.
- * expDate... 2013-11 or 2013-12 Because the API limitation, we cannot query historical option data.
- */
-std::string MyAppHelper::getOptions(string stockSymbol, string expDate) {
-  LOGGER(DEBUG_FLAG, "Building yql query..");
-  MyAppHelper &appHelper = MyAppHelper::getInstance();
-
+std::string MyAppHelper::buildYQLQuery(string query, string where1, string where2) {
+  LOGGER(DEBUG_FLAG, "Building Yahoo YQL query...");
   string yqlQuery(MyAppHelper::YAHOO_YQL_QUERY);
 
   yqlQuery.replace(yqlQuery.find("[query]"), 7, "option");
-  yqlQuery.replace(yqlQuery.find("[o_name]"), 8, stockSymbol);
-  yqlQuery.replace(yqlQuery.find("[o_exp_date]"), 12, expDate);
-  LOGGER(DEBUG_FLAG, "Done..");
-  LOGGER(DEBUG_FLAG, "Yql query is " << yqlQuery);
-  //cout << yqlQuery << endl;
+  yqlQuery.replace(yqlQuery.find("[o_name]"), 8, where1);
+  yqlQuery.replace(yqlQuery.find("[o_exp_date]"), 12, where2);
 
-  //cout << curl_escape(yqlQuery.c_str(), yqlQuery.size()) << endl;
+  LOGGER(DEBUG_FLAG, "YQL query is " << yqlQuery);
 
   string request(MyAppHelper::YAHOO_YQL_API_PREFIXURL);
   request.append(curl_escape(yqlQuery.c_str(), yqlQuery.size()));
@@ -114,6 +105,17 @@ std::string MyAppHelper::getOptions(string stockSymbol, string expDate) {
   request.append(curl_escape(MyAppHelper::YAHOO_YQL_API_SUFFIX.c_str(),
                  MyAppHelper::YAHOO_YQL_API_SUFFIX.size()));
 
+  LOGGER(DEBUG_FLAG, "Retrieving Option data...");
+  return request;
+}
+
+/**
+ * Retrieve all options with the given stock symbol and expiration date.
+ * expDate... 2013-11 or 2013-12 Because the API limitation, we cannot query historical option data.
+ */
+std::string MyAppHelper::getOptions(string stockSymbol, string expDate) {
+  MyAppHelper &appHelper = MyAppHelper::getInstance();
+  string request = buildYQLQuery("option", stockSymbol, expDate);
   return appHelper.httpGetRequest(request);
 }
 
@@ -128,6 +130,7 @@ OptionCollection MyAppHelper::getOptionListByOptionType(std::string stockName, s
   Json::Value root; //will contains the root value(json object) after parsing.
   Json::Reader reader;
 
+  LOGGER(DEBUG_FLAG, "Started to retrieving Option data from YQL web service...");
   std::string jsonString = getOptions(stockName, expDate);
   double currentStockPrice = getStockPrice(stockName);
   boost::gregorian::date cDate(boost::gregorian::day_clock::local_day());
@@ -137,12 +140,14 @@ OptionCollection MyAppHelper::getOptionListByOptionType(std::string stockName, s
 
   if (not parsedSuccess) {
     // report to the user the failure and their locations in the document.
-    std::cout << "Failed to parse Option JSON" << std::endl << reader.getFormatedErrorMessages() << std::endl;
+    LOGGER(ERROR_FLAG, "Failed to parse Option JSON" << std::endl << reader.getFormatedErrorMessages());
     exit(1);
   }
 
-  const Json::Value optionsChain = root["query"]["results"]["optionsChain"];
+  LOGGER(DEBUG_FLAG, "Retrieved Option data...");
 
+  const Json::Value optionsChain = root["query"]["results"]["optionsChain"];
+  LOGGER(DEBUG_FLAG, "Starting parsing Option data...");
   if (not optionsChain.isNull()) {
     for (unsigned int index = 0; index < optionsChain.size(); index++) {
       const Json::Value optionSymbol = optionsChain[index]["option"]["symbol"];
@@ -159,6 +164,7 @@ OptionCollection MyAppHelper::getOptionListByOptionType(std::string stockName, s
           Option &p = optionFactory->createOption(stockName, oSymbol, oStrikePrice, 
                                                   currentStockPrice, oPrice, PUT, currentDate, 
                                                   oExpirationDate);
+          // LOGGER(DEBUG_FLAG, "Added new Option..." << p);
           optionList.addOption(p);
         }
       } else if (otype == CALL) {
@@ -173,11 +179,12 @@ OptionCollection MyAppHelper::getOptionListByOptionType(std::string stockName, s
           Option &p = optionFactory->createOption(stockName, oSymbol, oStrikePrice, 
                                                   currentStockPrice, oPrice, CALL, currentDate, 
                                                   oExpirationDate);
+          // LOGGER(DEBUG_FLAG, "Added new Option..." << p);
           optionList.addOption(p);
         }
       }
     }
-    
+    LOGGER(DEBUG_FLAG, "Finished parse Option data... ");
     return optionList;
   } else {
       exit(1);

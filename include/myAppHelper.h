@@ -39,6 +39,7 @@ private:
   static const std::string YAHOO_YQL_API_SUFFIX;
   static bool instanceFlag;
   static MyAppHelper *single;
+  std::string buildYQLQuery(string query, string where1, string where2);
   std::string getOptions(std::string stockSymbol, std::string expDate);
   std::string getDateFromSymbol(std::string optionSymbol, std::string type);
 public:
