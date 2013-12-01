@@ -82,7 +82,7 @@ void Option::setPurchaseDate(string purchaseDate) {
 }
 
 string Option::getPurchaseDate() {
-	return boost::gregorian::to_iso_extended_string(this->purchaseDate);
+	return boost::gregorian::to_simple_string(this->purchaseDate);
 }
 
 void Option::setExpirationDate(string expirationDate) {
@@ -95,5 +95,5 @@ void Option::setExpirationDate(string expirationDate) {
 }
 
 string Option::getExpirationDate() {
-	return boost::gregorian::to_iso_extended_string(this->expirationDate);
+	return boost::gregorian::to_simple_string(this->expirationDate);
 }

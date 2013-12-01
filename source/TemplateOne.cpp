@@ -24,19 +24,77 @@ void TemplateOne::doFirstCheck(){
 void TemplateOne::doSecondCheck(){
 	std::vector<Option>::iterator iterCall;
 	std::vector<Option>::iterator iterPut;
+
 	for( iterCall = call_.begin(), iterPut = put_.begin(); iterCall != call_.end();){
-		double a = (*iterCall).getOptionPrice() + (*iterCall).getStrikePrice() * exp(-0.07);
+		boost::gregorian::date purchaseDate = boost::gregorian::from_simple_string((*iterCall).getPurchaseDate());
+		boost::gregorian::date expirationDate = boost::gregorian::from_simple_string((*iterCall).getExpirationDate());
+		boost::gregorian::date_period dp( purchaseDate, expirationDate );
+
+		double a = (*iterCall).getOptionPrice() + (*iterCall).getStrikePrice() * exp(-0.07 * dp.length().days() / 365);
 		double b = (*iterPut).getOptionPrice() + (*iterPut).getPurchasePrice();
 		if(a == b){
 			iterCall = call_.erase(iterCall);
 			iterPut = put_.erase(iterPut);
 			LOGGER(DEBUG_FLAG, "a == b");
 		} else {
-			result_.push_back(*iterCall);
-			result_.push_back(*iterPut);
+			secondResult_.push_back(*iterCall);
+			secondResult_.push_back(*iterPut);
 			iterCall++;
 			iterPut++;
 		}
 	}
 	LOGGER(DEBUG_FLAG, "in doSecondCheck");
+}
+
+void TemplateOne::doThirdCheck(){
+	std::map< std::string, std::vector<Option> > resultMap;
+
+	/*
+	 * seprate options according to different expiration date.
+	 */
+	std::vector<Option>::iterator iter;
+
+	for( iter = secondResult_.begin(); iter != secondResult_.end(); iter++){
+		string date = (*iter).getExpirationDate();
+		if( resultMap.find(date) == resultMap.end() ){
+			std::vector<Option> newVector;
+			newVector.push_back(*iter);
+			resultMap[date] = newVector;
+
+		} else {
+			std::map< std::string, std::vector<Option> >::iterator it;
+			it = resultMap.find(date);
+			it->second.push_back(*iter);
+			LOGGER(DEBUG_FLAG, "keys in map");
+		}
+			
+	}
+
+	/* display keys and related values.
+	std::map< std::string, std::vector<Option> >::iterator i;
+	for(i = resultMap.begin(); i != resultMap.end(); i++){
+		std::cout << "key: " << i->first << std::endl;
+		for (vector<Option>::iterator it = i->second.begin() ; it != i->second.end(); ++it)
+			std::cout << *it << endl;
+  		std::cout << endl;
+	}
+	*/
+
+	/*
+	 * return a vector according to the user input.
+	 */
+	std::cout << "Please choose an expiration date from here:" << endl;
+	std::map< std::string, std::vector<Option> >::iterator k;
+	for(k = resultMap.begin(); k != resultMap.end(); k++)
+		std::cout << k->first << std::endl;
+	std::cout << "please input the date: ";
+	string input;
+	std::cin >> input;
+
+	std::map< std::string, std::vector<Option> >::iterator result;
+	result = resultMap.find(input);
+	result_ = result->second;
+
+	for (vector<Option>::iterator it = result_.begin() ; it != result_.end(); ++it)
+			std::cout << *it << endl;
 }
