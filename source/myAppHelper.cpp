@@ -72,7 +72,7 @@ double MyAppHelper::getStockPrice(const std::string& stockName) {
 
   if (not parsedSuccess) {
     // report to the user the failure and their locations in the document.
-    std::cout << "Failed to parse Stock JSON" << std::endl << reader.getFormatedErrorMessages() << std::endl;
+    LOGGER(ERROR_FLAG, "Failed to parse Stock JSON" << std::endl << reader.getFormatedErrorMessages());
     exit(1);
   }
 
