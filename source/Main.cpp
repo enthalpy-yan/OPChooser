@@ -6,6 +6,8 @@ namespace po = boost::program_options;
 
 #include "MyAppHelper.h"
 #include "Logger.h"
+#include "OptionFilter.h"
+#include "TemplateOne.h"
 
 int main(int ac, char* av[]) {
   LOGGER_CONF("", Logger::screen_on, ERROR_FLAG, ERROR_FLAG);
@@ -39,13 +41,20 @@ int main(int ac, char* av[]) {
     // double p1 = GET_STOCK_PRICE("GOOG");
     // cout << "Current Price for GOOG is: " << p1 << endl;
 
-    OptionCollection optionList = GET_OPTIONS("AAPL", "2013-12-21", PUT);
+    OptionCollection optionListCall = GET_OPTIONS("MSFT", "2013-12", CALL);
+    OptionCollection optionListPut = GET_OPTIONS("MSFT", "2013-12", PUT);
 
-    IOptionIterator *iter = optionList.getIterator();
+    // IOptionIterator *iter = optionList.getIterator();
 
-    for ( Option p = iter->firstOption(); iter->isDone() == false; p = iter->nextOption() ) {
-      std::cout << p << std::endl;
-    }
+    // for ( Option p = iter->firstOption(); iter->isDone() == false; p = iter->nextOption() ) {
+    //   std::cout << p << std::endl;
+    // }
+
+    OptionFilter *of = new TemplateOne(optionListCall, optionListPut);
+    vector<Option> result = of->filter();
+    cout << "result size: " << result.size() << endl;
+    cout << "call: " << optionListCall.count() << endl;
+    cout << "put: " << optionListPut.count() << endl;
 
   } catch(exception& e) {
     LOGGER(ERROR_FLAG, e.what());
