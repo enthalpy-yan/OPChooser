@@ -18,4 +18,5 @@ $(EXECUTABLE): $(OBJECTS)
 clean:  
 	rm -rf $(SOURCEDIR)/*.o
 	rm $(EXECUTABLE)
+	rm *.log
 

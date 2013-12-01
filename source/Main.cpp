@@ -39,13 +39,13 @@ int main(int ac, char* av[]) {
     // double p1 = GET_STOCK_PRICE("GOOG");
     // cout << "Current Price for GOOG is: " << p1 << endl;
 
-    OptionCollection optionList = GET_OPTIONS("GOOG", "2013-12-21", CALL);
+    OptionCollection optionList = GET_OPTIONS("AAPL", "2013-12-21", PUT);
 
-    // IOptionIterator *iter = optionList.getIterator();
+    IOptionIterator *iter = optionList.getIterator();
 
-    // for ( Option p = iter->firstOption(); iter->isDone() == false; p = iter->nextOption() ) {
-    //   std:cout << p << std::endl;
-    // }
+    for ( Option p = iter->firstOption(); iter->isDone() == false; p = iter->nextOption() ) {
+      std::cout << p << std::endl;
+    }
 
   } catch(exception& e) {
     LOGGER(ERROR_FLAG, e.what());

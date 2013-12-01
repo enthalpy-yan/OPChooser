@@ -36,7 +36,7 @@ double MyAppHelper::s_to_d(const std::string& strPrice) {
  * @return date
  */
 std::string MyAppHelper::getDateFromSymbol(std::string optionSymbol, std::string type) {
-  int index = optionSymbol.find(type);
+  int index = optionSymbol.find_last_of(type);
   std::string rawDateStr = optionSymbol.substr(index - 6, 6);
   rawDateStr.insert(0, "20");
   return rawDateStr;
