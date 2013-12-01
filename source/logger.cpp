@@ -2,7 +2,7 @@
 #include <new>
 #include <cstdlib>
 
-#include "Logger.h"
+#include "logger.h"
 
 // Definition (and initialization) of static attributes
 Logger* Logger::m_ = 0;
