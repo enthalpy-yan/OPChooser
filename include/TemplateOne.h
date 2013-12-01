@@ -14,6 +14,7 @@ public:
 
 	void doFirstCheck();
 	void doSecondCheck();
+	void doThirdCheck();
 };
 
 #endif

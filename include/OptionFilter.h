@@ -10,12 +10,14 @@ protected:
 	OptionCollection originPut_;
 	std::vector<Option> call_;
 	std::vector<Option> put_;
+	std::vector<Option> secondResult_;
 	std::vector<Option> result_;
 
 public:
 	std::vector<Option> filter();
 	virtual void doFirstCheck() = 0;
 	virtual void doSecondCheck() = 0;
+	virtual void doThirdCheck() = 0;
 };
 
 #endif
