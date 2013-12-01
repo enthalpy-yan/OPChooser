@@ -15,6 +15,7 @@ int main(int ac, char* av[]) {
     desc.add_options()
       ("help,h", "Print help messages")
       ("verbose,v", "Print words with verbosity")
+      ("output,o", boost::program_options::value<std::string>(), "Set logging output file.")
     ;
 
     boost::program_options::variables_map vm;
@@ -26,9 +27,12 @@ int main(int ac, char* av[]) {
       return 0;
     }
 
-    if (vm.count("verbose")) {
+    if (vm.count("verbose") && vm.count("output")) {
+      LOGGER_CONF(vm["output"].as<std::string>(), Logger::screen_on | Logger::file_on, DEBUG_FLAG, DEBUG_FLAG);
+    } else if (vm.count("verbose")) {
       LOGGER_CONF("", Logger::screen_on, DEBUG_FLAG, DEBUG_FLAG);
-      LOGGER(DEBUG_FLAG, "Turn on verbose mode...");
+    } else if (vm.count("output")) {
+      LOGGER_CONF(vm["output"].as<std::string>(), Logger::file_on, DEBUG_FLAG, DEBUG_FLAG);
     } 
 
     // double p1 = GET_STOCK_PRICE("GOOG");
