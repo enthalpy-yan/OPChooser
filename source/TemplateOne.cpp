@@ -25,7 +25,7 @@ void TemplateOne::doSecondCheck(){
 	std::vector<Option>::iterator iterCall;
 	std::vector<Option>::iterator iterPut;
 	for( iterCall = call_.begin(), iterPut = put_.begin(); iterCall != call_.end();){
-		double a = (*iterCall).getOptionPrice() + (*iterCall).getStrikePrice() * exp(-0.07 * TIME);
+		double a = (*iterCall).getOptionPrice() + (*iterCall).getStrikePrice() * exp(-0.07);
 		double b = (*iterPut).getOptionPrice() + (*iterPut).getPurchasePrice();
 		if(a == b){
 			iterCall = call_.erase(iterCall);
