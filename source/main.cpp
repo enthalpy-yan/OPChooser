@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <string>
 #include <boost/program_options.hpp>
+namespace po = boost::program_options;
 
 #include "myAppHelper.h"
 #include "logger.h"
@@ -11,16 +12,16 @@ int main(int ac, char* av[]) {
 
   try {
 
-    boost::program_options::options_description desc("Allowed options");
+    po::options_description desc("Allowed options");
     desc.add_options()
       ("help,h", "Print help messages")
       ("verbose,v", "Print words with verbosity")
-      ("output,o", boost::program_options::value<std::string>(), "Set logging output file.")
+      ("output,o", po::value<std::string>(), "Set logging output file.")
     ;
 
-    boost::program_options::variables_map vm;
-    boost::program_options::store(boost::program_options::parse_command_line(ac, av, desc), vm);
-    boost::program_options::notify(vm);
+    po::variables_map vm;
+    po::store(po::parse_command_line(ac, av, desc), vm);
+    po::notify(vm);
 
     if (vm.count("help")) {
       cout << desc << "\n";
@@ -48,7 +49,7 @@ int main(int ac, char* av[]) {
 
   } catch(exception& e) {
     LOGGER(ERROR_FLAG, "error: " << e.what());
-    return 1;
+    exit(1);
   } catch(...) {
     LOGGER(ERROR_FLAG, "Exception of unknown type!");
   }
