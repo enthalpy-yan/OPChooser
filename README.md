@@ -7,7 +7,11 @@ This is a final project for FE545: Design Patterns and Derivatives Pricing.
 Under the root directory
 ```
 $ make
-$ ./finalProject
+$ ./finalProject -h
+Allowed options:
+  -h [ --help ]         Print help messages
+  -v [ --verbose ]      Print words with verbosity
+  -o [ --output ] arg   Set logging output file.
 ```
 
 ## Dependencies
