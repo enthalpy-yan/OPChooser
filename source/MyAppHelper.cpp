@@ -24,6 +24,7 @@ MyAppHelper& MyAppHelper::getInstance() {
 }
 
 void MyAppHelper::StrategySet(vector<Option> v,multimap<double,vector<string> > &resultmap) {
+  LOGGER(DEBUG_FLAG, "Apply strategy to each of combinations...");
   double LVal;
   double RVal;
   Context* pcon;
@@ -37,12 +38,12 @@ void MyAppHelper::StrategySet(vector<Option> v,multimap<double,vector<string> > 
   RVal = (v.at(3)).getOptionPrice() - (v.at(1)).getOptionPrice() - (v.at(1)).getOptionPrice()+ (v.at(0)).getOptionPrice();
 
   if (LVal > RVal) {
-    LOGGER(DEBUG_FLAG, "Apply Strategy 1...");
+    //Strategy 1
     pStr = new StrategyA();
     pcon = new Context(pStr);
     pcon->DoAction(v, resultmap);
   } else {
-    LOGGER(DEBUG_FLAG, "Apply Strategy 2...");
+    //Strategy 2
     pStr = new StrategyB();
     pcon = new Context(pStr);
     pcon->DoAction(v,resultmap);
@@ -50,6 +51,7 @@ void MyAppHelper::StrategySet(vector<Option> v,multimap<double,vector<string> > 
 }
 
 void MyAppHelper::Order(vector<Option> v,multimap<double,vector<string> > &resultmap) {
+  LOGGER(DEBUG_FLAG, "Started to find option combinations...");
   int lenght= v.size();
   vector<Option> newvector;
   vector<Option> finalresult;
@@ -153,7 +155,6 @@ std::string MyAppHelper::buildYQLQuery(string query, string where1, string where
   request.append(curl_escape(MyAppHelper::YAHOO_YQL_API_SUFFIX.c_str(),
                  MyAppHelper::YAHOO_YQL_API_SUFFIX.size()));
 
-  LOGGER(DEBUG_FLAG, "Retrieving Option data...");
   return request;
 }
 
@@ -173,12 +174,12 @@ std::string MyAppHelper::getOptions(string stockSymbol, string expDate) {
  * @return 
  */
 OptionCollection MyAppHelper::getOptionListByOptionType(std::string stockName, std::string expDate, OptionType otype) {
+  LOGGER(DEBUG_FLAG, "Started to retrieving Option data from YQL web service.. " << "Symbol: " << stockName << " Type: " << (otype ? "PUT" : "CALL"));
   OptionCollection optionList;
   OptionFactory *optionFactory = new OptionFactory();
   Json::Value root; //will contains the root value(json object) after parsing.
   Json::Reader reader;
 
-  LOGGER(DEBUG_FLAG, "Started to retrieving Option data from YQL web service...");
   std::string jsonString = getOptions(stockName, expDate);
   double currentStockPrice = getStockPrice(stockName);
   boost::gregorian::date cDate(boost::gregorian::day_clock::local_day());

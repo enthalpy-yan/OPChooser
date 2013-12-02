@@ -13,7 +13,6 @@ class Strategy {
 public:
   ~Strategy();
   virtual void AlgrithmInterface(vector<Option>, multimap<double, vector<string> >&);
-  // map<double,vector<string>> resultmap;
   Strategy();
 
 };
