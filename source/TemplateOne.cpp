@@ -19,7 +19,7 @@ void TemplateOne::doFirstCheck(){
 			}
 		}
 	}
-	LOGGER(DEBUG_FLAG, "in doFirstCheck");
+	LOGGER(DEBUG_FLAG, "The first filter has been finished!");
 }
 
 void TemplateOne::doSecondCheck(){
@@ -36,7 +36,7 @@ void TemplateOne::doSecondCheck(){
 		if(a == b){
 			iterCall = call_.erase(iterCall);
 			iterPut = put_.erase(iterPut);
-			LOGGER(DEBUG_FLAG, "a == b");
+			LOGGER(DEBUG_FLAG, "One group was deleted by second filter");
 		} else {
 			secondResult_.push_back(*iterCall);
 			secondResult_.push_back(*iterPut);
@@ -44,7 +44,7 @@ void TemplateOne::doSecondCheck(){
 			iterPut++;
 		}
 	}
-	LOGGER(DEBUG_FLAG, "in doSecondCheck");
+	LOGGER(DEBUG_FLAG, "The second filter has been finished!");
 }
 
 void TemplateOne::doThirdCheck(){
@@ -73,18 +73,22 @@ void TemplateOne::doThirdCheck(){
 	/*
 	 * return a vector according to the user input.
 	 */
-	std::cout << "Please choose an expiration date from here:" << endl;
+	std::cout << "============================================" << endl;
+	std::cout << " Please choose an expiration date from here " << endl;
 	std::map< std::string, std::vector<Option> >::iterator k;
 	for(k = resultMap.begin(); k != resultMap.end(); k++)
-		std::cout << k->first << std::endl;
-	std::cout << "please input the date: ";
+		std::cout << "              " << k->first << std::endl;
+	std::cout << "============================================" << endl;
+	std::cout << " Please input one date: ";
 	string input;
 	std::cin >> input;
+
 
 	std::map< std::string, std::vector<Option> >::iterator result;
 	result = resultMap.find(input);
 	result_ = result->second;
-
+	
+	LOGGER(DEBUG_FLAG, "The third filter has been finished!");
 	// for (vector<Option>::iterator it = result_.begin() ; it != result_.end(); ++it)
 	// 		std::cout << *it << endl;
 }
