@@ -9,9 +9,11 @@ Under the root directory
 $ make
 $ ./finalProject -h
 Allowed options:
-  -h [ --help ]         Print help messages
-  -v [ --verbose ]      Print words with verbosity
+  -h [ --help ]         Print help messages.
+  -v [ --verbose ]      Print words with verbosity.
   -o [ --output ] arg   Set logging output file.
+  -t [ --ticker ] arg   Set the name of ticker.
+  -d [ --date ] arg     Set expiration date for the given ticker.
 ```
 
 ## Dependencies
