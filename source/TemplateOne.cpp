@@ -66,20 +66,9 @@ void TemplateOne::doThirdCheck(){
 			std::map< std::string, std::vector<Option> >::iterator it;
 			it = resultMap.find(date);
 			it->second.push_back(*iter);
-			LOGGER(DEBUG_FLAG, "keys in map");
 		}
 			
 	}
-
-	/* display keys and related values.
-	std::map< std::string, std::vector<Option> >::iterator i;
-	for(i = resultMap.begin(); i != resultMap.end(); i++){
-		std::cout << "key: " << i->first << std::endl;
-		for (vector<Option>::iterator it = i->second.begin() ; it != i->second.end(); ++it)
-			std::cout << *it << endl;
-  		std::cout << endl;
-	}
-	*/
 
 	/*
 	 * return a vector according to the user input.
@@ -96,6 +85,6 @@ void TemplateOne::doThirdCheck(){
 	result = resultMap.find(input);
 	result_ = result->second;
 
-	for (vector<Option>::iterator it = result_.begin() ; it != result_.end(); ++it)
-			std::cout << *it << endl;
+	// for (vector<Option>::iterator it = result_.begin() ; it != result_.end(); ++it)
+	// 		std::cout << *it << endl;
 }

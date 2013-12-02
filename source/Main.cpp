@@ -42,8 +42,8 @@ int main(int ac, char* av[]) {
     // double p1 = GET_STOCK_PRICE("GOOG");
     // cout << "Current Price for GOOG is: " << p1 << endl;
 
-    OptionCollection optionListCall = GET_OPTIONS("MSFT", "2013-12", CALL);
-    OptionCollection optionListPut = GET_OPTIONS("MSFT", "2013-12", PUT);
+    OptionCollection optionListCall = GET_OPTIONS("AAPL", "2013-12", CALL);
+    OptionCollection optionListPut = GET_OPTIONS("AAPL", "2013-12", PUT);
 
     // IOptionIterator *iter = optionList.getIterator();
 
@@ -62,7 +62,7 @@ int main(int ac, char* av[]) {
 
     ORDER(resultVector, resultMap);
   
-    cout << resultMap.size() << endl;
+    cout << "resultMap size: " << resultMap.size() << endl;
     
     double max;
 

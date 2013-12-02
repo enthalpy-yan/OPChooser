@@ -32,7 +32,7 @@ void StrategyA::AlgrithmInterface(vector<Option> vec, multimap<double, vector<st
   for ( unsigned int i = 0 ; i < vec.size(); i++ ) {
     temp.push_back(vec.at(i).getOptionSymbol());
   }
-
+  std::cout << "payoff: " << payOff << endl;
   typedef pair<double, vector<string> > Pair;
   resultmap.insert(Pair(payOff,temp));
 }
@@ -59,6 +59,7 @@ void StrategyB::AlgrithmInterface(vector<Option> vec, multimap<double, vector<st
   for (unsigned int i = 0; i < vec.size(); i++) {
     temp.push_back(vec.at(i).getOptionSymbol());
   }
+  std::cout << "payoff: " << payOff << endl;
   typedef pair<double, vector<string> > Pair;
   resultmap.insert(Pair(payOff,temp));
 }
