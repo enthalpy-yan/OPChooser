@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <cmath>
 #include <json/json.h>
 
 #include "Restclient.h"
