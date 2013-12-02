@@ -25,13 +25,21 @@ int main(int ac, char* av[]) {
     ;
 
     po::variables_map vm;
-    po::store(po::parse_command_line(ac, av, desc), vm);
-    po::notify(vm);
+    po::store(
+      po::command_line_parser(ac,av)
+      .options(desc)
+      .style(
+          po::command_line_style::unix_style
+        | po::command_line_style::allow_long_disguise)
+      .run(),
+    vm);
 
     if (vm.count("help")) {
       cout << desc << "\n";
       return 0;
     }
+
+    po::notify(vm);
 
     if (vm.count("verbose") && vm.count("output")) {
       LOGGER_CONF(vm["output"].as<std::string>(), Logger::screen_on | Logger::file_on, DEBUG_FLAG, DEBUG_FLAG);
@@ -39,7 +47,7 @@ int main(int ac, char* av[]) {
       LOGGER_CONF("", Logger::screen_on, DEBUG_FLAG, DEBUG_FLAG);
     } else if (vm.count("output")) {
       LOGGER_CONF(vm["output"].as<std::string>(), Logger::file_on, DEBUG_FLAG, DEBUG_FLAG);
-    } 
+    }  
 
     OptionCollection optionListCall = GET_OPTIONS(vm["ticker"].as<std::string>(), vm["date"].as<std::string>(), CALL);
     OptionCollection optionListPut = GET_OPTIONS(vm["ticker"].as<std::string>(), vm["date"].as<std::string>(), PUT);
