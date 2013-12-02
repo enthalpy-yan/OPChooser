@@ -39,34 +39,19 @@ int main(int ac, char* av[]) {
       LOGGER_CONF(vm["output"].as<std::string>(), Logger::file_on, DEBUG_FLAG, DEBUG_FLAG);
     } 
 
-    // double p1 = GET_STOCK_PRICE("GOOG");
-    // cout << "Current Price for GOOG is: " << p1 << endl;
-
     OptionCollection optionListCall = GET_OPTIONS("AAPL", "2013-12", CALL);
     OptionCollection optionListPut = GET_OPTIONS("AAPL", "2013-12", PUT);
 
-    // IOptionIterator *iter = optionList.getIterator();
-
-    // for ( Option p = iter->firstOption(); iter->isDone() == false; p = iter->nextOption() ) {
-    //   std::cout << p << std::endl;
-    // }
-
     OptionFilter *of = new TemplateOne(optionListCall, optionListPut);
     vector<Option> resultVector = of->filter();
-    cout << "result size: " << resultVector.size() << endl;
-    cout << "call: " << optionListCall.count() << endl;
-    cout << "put: " << optionListPut.count() << endl;
 
     multimap<double,vector<string> > resultMap;
 
-
     ORDER(resultVector, resultMap);
   
-    cout << "resultMap size: " << resultMap.size() << endl;
-    
     double max;
-
     map<double,vector<string> >::iterator it;
+
     for (it = resultMap.begin(); it != resultMap.end(); it++) {  
       if(it == resultMap.begin())
          max = it->first;
@@ -76,13 +61,13 @@ int main(int ac, char* av[]) {
         else
           continue;
       }
-
     }
 
     cout << "You should select this combination" << endl;
+
     it = resultMap.find(max);
     cout << it->second.size() << endl;
-    for(unsigned int i = 0; i < it->second.size(); i++)
+    for (unsigned int i = 0; i < it->second.size(); i++)
       cout << it->second.at(i) << endl;
 
     cout << "And the payOff is " << max << endl;
