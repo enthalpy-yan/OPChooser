@@ -62,7 +62,7 @@ int main(int ac, char* av[]) {
 
     ORDER(resultVector, resultMap);
   
-    cout << "resultMap size: " << resultMap.size() << endl;
+    LOGGER(DEBUG_FLAG, "the size of portfolio is: " << resultMap.size());
     
     double max;
 
@@ -79,13 +79,14 @@ int main(int ac, char* av[]) {
 
     }
 
-    cout << "You should select this combination" << endl;
+    cout << "=========================================" << endl;
+    cout << " The optimum portfolio has been selected" << endl;
     it = resultMap.find(max);
-    cout << it->second.size() << endl;
     for(unsigned int i = 0; i < it->second.size(); i++)
-      cout << it->second.at(i) << endl;
+      cout << "      " << it->second.at(i) << endl;
 
-    cout << "And the payOff is " << max << endl;
+    cout << " And the payOff is " << max << endl;
+    cout << "=========================================" << endl;
 
   } catch(exception& e) {
     LOGGER(ERROR_FLAG, e.what());
