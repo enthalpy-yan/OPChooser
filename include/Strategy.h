@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Option.h"
+#include "Logger.h"
 
 using namespace std;
 

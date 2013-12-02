@@ -154,7 +154,7 @@ std::string MyAppHelper::buildYQLQuery(string query, string where1, string where
   request.append("&format=json&env=");
   request.append(curl_escape(MyAppHelper::YAHOO_YQL_API_SUFFIX.c_str(),
                  MyAppHelper::YAHOO_YQL_API_SUFFIX.size()));
-
+  LOGGER(DEBUG_FLAG, "Waiting for response from server...");
   return request;
 }
 
