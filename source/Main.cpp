@@ -17,8 +17,8 @@ int main(int ac, char* av[]) {
 
     po::options_description desc("Allowed options");
     desc.add_options()
-      ("help,h", "Print help messages")
-      ("verbose,v", "Print words with verbosity")
+      ("help,h", "Print help messages.")
+      ("verbose,v", "Print words with verbosity.")
       ("output,o", po::value<std::string>(), "Set logging output file.")
       ("ticker,t", po::value<std::string>()->required(), "Set the name of ticker.")
       ("date,d", po::value<std::string>()->required(), "Set expiration date for the given ticker.")
