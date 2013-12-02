@@ -113,6 +113,7 @@ FE545-FinalProject/
   |  |- logger.h               (Header file for Logger class)
   |  |- OptionFilter.h	       (Header file for options filter class)
   |  |- TemplateOne.h	       (Header file for Template Method class)
+  |  |- Strategy.h	       (Header file for Strategy class)
   |- source/
   |  |- main.cpp               (Main function)
   |  |- myAppHelper.cpp        (Implementation for Helper class)
@@ -124,6 +125,7 @@ FE545-FinalProject/
   |  |- logger.cpp             (Implementation for Logger class)
   |  |- OptionFilter.cpp       (Implementation for options filter class)
   |  |- TemplateOne.cpp	       (Implementation for Template Method class)
+  |  |- Strategy.cpp	       (Implementation for Strategy class)
   |- Makefile                  (Makefile for building this application)
   |- README.md                 (Readme file for github)
 ```
