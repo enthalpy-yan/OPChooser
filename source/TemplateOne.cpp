@@ -74,7 +74,7 @@ void TemplateOne::doThirdCheck(){
 	 * return a vector according to the user input.
 	 */
 	std::cout << "============================================" << endl;
-	std::cout << " Please choose an expiration date from here " << endl;
+	std::cout << " Please choose an expiration date from here " << endl << endl;
 	std::map< std::string, std::vector<Option> >::iterator k;
 	for(k = resultMap.begin(); k != resultMap.end(); k++)
 		std::cout << "              " << k->first << std::endl;

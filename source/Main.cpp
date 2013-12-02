@@ -20,6 +20,7 @@ int main(int ac, char* av[]) {
       ("help,h", "Print help messages")
       ("verbose,v", "Print words with verbosity")
       ("output,o", po::value<std::string>(), "Set logging output file.")
+      ("ticker,t", po::value<std::string>()->required(), "Set the name of ticker")
     ;
 
     po::variables_map vm;
@@ -39,8 +40,8 @@ int main(int ac, char* av[]) {
       LOGGER_CONF(vm["output"].as<std::string>(), Logger::file_on, DEBUG_FLAG, DEBUG_FLAG);
     } 
 
-    OptionCollection optionListCall = GET_OPTIONS("AAPL", "2013-12", CALL);
-    OptionCollection optionListPut = GET_OPTIONS("AAPL", "2013-12", PUT);
+    OptionCollection optionListCall = GET_OPTIONS(vm["ticker"].as<std::string>(), "2013-12", CALL);
+    OptionCollection optionListPut = GET_OPTIONS(vm["ticker"].as<std::string>(), "2013-12", PUT);
 
     OptionFilter *of = new TemplateOne(optionListCall, optionListPut);
     vector<Option> resultVector = of->filter();
@@ -65,14 +66,17 @@ int main(int ac, char* av[]) {
       }
     }
 
-    cout << "=========================================" << endl;
-    cout << " The optimum portfolio has been selected" << endl;
+    cout << "============================================" << endl;
+    cout << "  The optimum portfolio has been selected" << endl;
     it = resultMap.find(max);
-    for(unsigned int i = 0; i < it->second.size(); i++)
-      cout << "      " << it->second.at(i) << endl;
+    cout << endl;
 
-    cout << " And the payOff is " << max << endl;
-    cout << "=========================================" << endl;
+    for(unsigned int i = 0; i < it->second.size(); i++)
+      cout << "            " << it->second.at(i) << endl;
+
+    cout << endl;
+    cout << "  PayOff: " << max << endl;
+    cout << "============================================" << endl;
 
   } catch(exception& e) {
     LOGGER(ERROR_FLAG, e.what());
