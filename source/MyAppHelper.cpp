@@ -23,6 +23,54 @@ MyAppHelper& MyAppHelper::getInstance() {
   }
 }
 
+void StrategySet(vector<Option> v,multimap<double,vector<string> > &resultmap) {
+  double LVal;
+  double RVal;
+  Context* pcon;
+  Strategy* pStr;
+
+  boost::gregorian::date purchaseDate = boost::gregorian::from_simple_string(v.at(2).getPurchaseDate());
+  boost::gregorian::date expirationDate = boost::gregorian::from_simple_string(v.at(0).getExpirationDate());
+  boost::gregorian::date_period dp( purchaseDate, expirationDate );
+
+  LVal = ((v.at(2).getStrikePrice() - v.at(0).getStrikePrice()) * exp((-0.08) * dp.length().days()));
+  RVal = (v.at(3)).getOptionPrice() - (v.at(1)).getOptionPrice() - (v.at(1)).getOptionPrice()+ (v.at(0)).getOptionPrice();
+
+  if (LVal > RVal) {
+    LOGGER(DEBUG_FLAG, "Apply Strategy 1...");
+    pStr = new StrategyA();
+    pcon = new Context(pStr);
+    pcon->DoAction(v, resultmap);
+  } else {
+    LOGGER(DEBUG_FLAG, "Apply Strategy 2...");
+    pStr = new StrategyB();
+    pcon = new Context(pStr);
+    pcon->DoAction(v,resultmap);
+  }
+}
+
+void Order(vector<Option> v,multimap<double,vector<string> > &resultmap) {
+  int lenght= v.size();
+  vector<Option> newvector;
+  vector<Option> finalresult;
+  
+  for(int i = 0; i < lenght - 2; i += 2) {
+    if (!newvector.empty())
+      newvector.clear();
+
+    newvector.push_back(v.at(i));
+    newvector.push_back(v.at(i + 1));
+
+    for(int m = i + 2; m < lenght; m += 2) {
+      newvector.push_back(v.at(m));
+      newvector.push_back(v.at(m + 1));
+      StrategySet(newvector, resultmap);
+      newvector.pop_back();
+      newvector.pop_back();   
+    }
+  }
+}
+
 /**
  * Convert string to double
  */

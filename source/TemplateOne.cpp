@@ -31,7 +31,7 @@ void TemplateOne::doSecondCheck(){
 		boost::gregorian::date expirationDate = boost::gregorian::from_simple_string((*iterCall).getExpirationDate());
 		boost::gregorian::date_period dp( purchaseDate, expirationDate );
 
-		double a = (*iterCall).getOptionPrice() + (*iterCall).getStrikePrice() * exp(-0.07 * dp.length().days() / 365);
+		double a = (*iterCall).getOptionPrice() + (*iterCall).getStrikePrice() * exp(-0.08 * dp.length().days() / 365);
 		double b = (*iterPut).getOptionPrice() + (*iterPut).getPurchasePrice();
 		if(a == b){
 			iterCall = call_.erase(iterCall);

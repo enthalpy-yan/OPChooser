@@ -8,6 +8,7 @@
 #include <cstdio>
 #include <string>
 #include <vector>
+#include <map>
 #include <json/json.h>
 
 #include "Restclient.h"
@@ -15,6 +16,7 @@
 #include "OptionCollection.h"
 #include "OptionFactory.h"
 #include "Logger.h"
+#include "Strategy.h"
 
 #define GET_STOCK_PRICE(stockName) MyAppHelper::getInstance().getStockPrice(stockName);
 #define GET_OPTIONS(stockSymbol, \
@@ -25,6 +27,8 @@
                       expDate, \
                       otype); 
 #define SEND_HTTP_REQUEST(url) MyAppHelper::getInstance().httpGetRequest(url);
+#define STRATEGYSET(vector, map) MyAppHelper::getInstance().StrategySet(vector, map);
+#define ORDER(vector, map) MyAppHelper::getInstance().Order(vector, map);
 
 /**
  *  Utility functions wrapper for my application.
@@ -51,6 +55,8 @@ public:
   OptionCollection getOptionListByOptionType(std::string stockSymbol, std::string expDate, OptionType otype);
   double getStockPrice(const std::string& stockName);
   double s_to_d(const std::string& strPrice);
+  void StrategySet(vector<Option> v,multimap<double,vector<string> > &resultmap);
+  void Order(vector<Option> v,multimap<double,vector<string> > &resultmap);
 };
 
 #endif

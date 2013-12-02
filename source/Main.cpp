@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <string>
 #include <boost/program_options.hpp>
+#include <map>
 namespace po = boost::program_options;
 
 #include "MyAppHelper.h"
@@ -51,10 +52,40 @@ int main(int ac, char* av[]) {
     // }
 
     OptionFilter *of = new TemplateOne(optionListCall, optionListPut);
-    vector<Option> result = of->filter();
-    cout << "result size: " << result.size() << endl;
+    vector<Option> resultVector = of->filter();
+    cout << "result size: " << resultVector.size() << endl;
     cout << "call: " << optionListCall.count() << endl;
     cout << "put: " << optionListPut.count() << endl;
+
+    multimap<double,vector<string> > resultMap;
+
+
+    ORDER(resultVector, resultMap);
+  
+    cout << resultMap.size() << endl;
+    
+    double max;
+
+    map<double,vector<string> >::iterator it;
+    for (it = resultMap.begin(); it != resultMap.end(); it++) {  
+      if(it == resultMap.begin())
+         max = it->first;
+      else {
+        if(it->first > max)
+           max = it->first;
+        else
+          continue;
+      }
+
+    }
+
+    cout << "You should select this combination" << endl;
+    it = resultMap.find(max);
+    cout << it->second.size() << endl;
+    for(unsigned int i = 0; i < it->second.size(); i++)
+      cout << it->second.at(i) << endl;
+
+    cout << "And the payOff is " << max << endl;
 
   } catch(exception& e) {
     LOGGER(ERROR_FLAG, e.what());
