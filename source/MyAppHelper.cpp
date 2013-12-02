@@ -23,7 +23,7 @@ MyAppHelper& MyAppHelper::getInstance() {
   }
 }
 
-void StrategySet(vector<Option> v,multimap<double,vector<string> > &resultmap) {
+void MyAppHelper::StrategySet(vector<Option> v,multimap<double,vector<string> > &resultmap) {
   double LVal;
   double RVal;
   Context* pcon;
@@ -49,7 +49,7 @@ void StrategySet(vector<Option> v,multimap<double,vector<string> > &resultmap) {
   }
 }
 
-void Order(vector<Option> v,multimap<double,vector<string> > &resultmap) {
+void MyAppHelper::Order(vector<Option> v,multimap<double,vector<string> > &resultmap) {
   int lenght= v.size();
   vector<Option> newvector;
   vector<Option> finalresult;
