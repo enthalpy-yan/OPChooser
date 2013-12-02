@@ -20,7 +20,8 @@ int main(int ac, char* av[]) {
       ("help,h", "Print help messages")
       ("verbose,v", "Print words with verbosity")
       ("output,o", po::value<std::string>(), "Set logging output file.")
-      ("ticker,t", po::value<std::string>()->required(), "Set the name of ticker")
+      ("ticker,t", po::value<std::string>()->required(), "Set the name of ticker.")
+      ("date,d", po::value<std::string>()->required(), "Set expiration date for the given ticker.")
     ;
 
     po::variables_map vm;
@@ -40,8 +41,8 @@ int main(int ac, char* av[]) {
       LOGGER_CONF(vm["output"].as<std::string>(), Logger::file_on, DEBUG_FLAG, DEBUG_FLAG);
     } 
 
-    OptionCollection optionListCall = GET_OPTIONS(vm["ticker"].as<std::string>(), "2013-12", CALL);
-    OptionCollection optionListPut = GET_OPTIONS(vm["ticker"].as<std::string>(), "2013-12", PUT);
+    OptionCollection optionListCall = GET_OPTIONS(vm["ticker"].as<std::string>(), vm["date"].as<std::string>(), CALL);
+    OptionCollection optionListPut = GET_OPTIONS(vm["ticker"].as<std::string>(), vm["date"].as<std::string>(), PUT);
 
     OptionFilter *of = new TemplateOne(optionListCall, optionListPut);
     vector<Option> resultVector = of->filter();
