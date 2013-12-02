@@ -181,6 +181,7 @@ OptionCollection MyAppHelper::getOptionListByOptionType(std::string stockName, s
   Json::Reader reader;
 
   std::string jsonString = getOptions(stockName, expDate);
+
   double currentStockPrice = getStockPrice(stockName);
   boost::gregorian::date cDate(boost::gregorian::day_clock::local_day());
   std::string currentDate = boost::gregorian::to_iso_string(cDate);
@@ -194,6 +195,13 @@ OptionCollection MyAppHelper::getOptionListByOptionType(std::string stockName, s
   }
 
   LOGGER(DEBUG_FLAG, "Retrieved Option data...");
+
+  const Json::Value coutJsonValue = root["query"];
+
+  if (coutJsonValue["count"] == 0) {
+    LOGGER(ERROR_FLAG, "!!!Response from server is empty. Please check the ticker name or expiration date and also your network connection.");
+    exit(1);
+  }
 
   const Json::Value optionsChain = root["query"]["results"]["optionsChain"];
   LOGGER(DEBUG_FLAG, "Starting parsing Option data...");

@@ -87,6 +87,8 @@ int main(int ac, char* av[]) {
     cout << "  PayOff: " << max << endl;
     cout << "============================================" << endl;
 
+  } catch (std::length_error) { 
+    LOGGER(ERROR_FLAG, "!!!Invalid ticker name.");
   } catch(exception& e) {
     LOGGER(ERROR_FLAG, e.what());
     exit(1);
