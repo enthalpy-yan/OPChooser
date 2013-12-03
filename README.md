@@ -2,7 +2,16 @@
 
 ## About
 
-OPChooser is a tool to help you make options trading decision. That is, it analyzes all of options retrieved by the given ticker symbol and then give you a set of options which has the max payoff. OPChooser is also a final project for Stevens Institute of Technology - FE545 Design Patterns and Derivatives Pricing.
+OPChooser is a tool to help you make options trading decision. That is, it analyzes all of options retrieved by the given ticker symbol and then give you a set of options which has the max payoff. OPChooser is also a final project for Stevens Institute of Technology - FE545 Design Patterns and Derivatives Pricing. The Motivations for this project is to learn and practice Object Oriented Design Patterns. 
+
+## Patterns
+
+- Singleton Pattern
+- Factory Pattern
+- Iterator Pattern
+- Template Pattern
+- Strategy Pattern
+
 
 ## Build and Run
 Under the root directory
