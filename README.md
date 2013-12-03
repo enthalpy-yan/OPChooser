@@ -91,8 +91,8 @@ class Option {
 
     Configures the logger.
     ```
-	DEBUG_CONF("outputfile", Logger::file_on|Logger::screen_on, DEBUG_FLAG, ERROR_FLAG) => log debug info in logfile and error info on screen.
-	DEBUG_CONF("", Logger::screen_on, DEBUG_FLAG, DEBUG_FLAG) => log debug info on screen.
+	LOGGER_CONF("outputfile", Logger::file_on|Logger::screen_on, DEBUG_FLAG, ERROR_FLAG) => log debug info in logfile and error info on screen.
+	LOGGER_CONF("", Logger::screen_on, DEBUG_FLAG, DEBUG_FLAG) => log debug info on screen.
     ```
 - LOGGER(log_flag, log_messages)
 
