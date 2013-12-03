@@ -18,15 +18,17 @@ void StrategyA::AlgrithmInterface(vector<Option> vec, multimap<double, vector<st
   double payOff;
   vector<string> temp;
 
-  if (200 <= (vec.at(0)).getStrikePrice()) {
+  double tempPrice = vec.at(0).getStrikePrice() + 20;
+
+  if (tempPrice <= (vec.at(0)).getStrikePrice()) {
     payOff = -(vec.at(3)).getOptionPrice() - (vec.at(0)).getOptionPrice() + (vec.at(1)).getOptionPrice() + (vec.at(2)).getOptionPrice()
-    + ((vec.at(0)).getStrikePrice() - 200);
-  } else if ((200 > vec.at(0).getStrikePrice() && 200 < (vec.at(2)).getStrikePrice()) || 200 == (vec.at(2)).getStrikePrice()) {
+    + ((vec.at(0)).getStrikePrice() - tempPrice);
+  } else if ((tempPrice > vec.at(0).getStrikePrice() && tempPrice < (vec.at(2)).getStrikePrice()) || tempPrice == (vec.at(2)).getStrikePrice()) {
     payOff = -(vec.at(3)).getOptionPrice() - (vec.at(0)).getOptionPrice() + (vec.at(1)).getOptionPrice() + (vec.at(2)).getOptionPrice()
-    + ((vec.at(2)).getStrikePrice() - 200) + (200 - (vec.at(0)).getStrikePrice());
+    + ((vec.at(2)).getStrikePrice() - tempPrice) + (tempPrice - (vec.at(0)).getStrikePrice());
   } else {
     payOff = -(vec.at(3)).getOptionPrice() - (vec.at(0)).getOptionPrice() + (vec.at(1)).getOptionPrice()
-    + (vec.at(2)).getOptionPrice() + ((200 - (vec.at(2)).getStrikePrice()) - (200) - (vec.at(2)).getStrikePrice());
+    + (vec.at(2)).getOptionPrice() + ((tempPrice - (vec.at(2)).getStrikePrice()) - (tempPrice) - (vec.at(2)).getStrikePrice());
   }
 
   for ( unsigned int i = 0 ; i < vec.size(); i++ ) {
@@ -44,16 +46,18 @@ StrategyB::~StrategyB() {}
 void StrategyB::AlgrithmInterface(vector<Option> vec, multimap<double, vector<string> > &resultmap) {
   double payOff;
   vector<string> temp;
-  if (200 <= (vec.at(0)).getStrikePrice()) {
+  double tempPrice = vec.at(0).getStrikePrice() + 20;
+
+  if (tempPrice <= (vec.at(0)).getStrikePrice()) {
     payOff = (vec.at(3)).getOptionPrice() + (vec.at(0)).getOptionPrice() - (vec.at(1)).getOptionPrice()
-    - (vec.at(2)).getOptionPrice() + ((vec.at(0)).getStrikePrice() - 200)
-    - ((vec.at(2)).getStrikePrice() - 200);
-  } else if (((vec.at(0)).getStrikePrice() < 200) && (200 <= (vec.at(2)).getStrikePrice())) {
-    payOff = (vec.at(3)).getOptionPrice() + (vec.at(0)).getOptionPrice() - (vec.at(1)).getOptionPrice() - (vec.at(2)).getOptionPrice() - ((vec.at(2)).getStrikePrice() - 200)
-    - (200 - (vec.at(0)).getStrikePrice());
+    - (vec.at(2)).getOptionPrice() + ((vec.at(0)).getStrikePrice() - tempPrice)
+    - ((vec.at(2)).getStrikePrice() - tempPrice);
+  } else if (((vec.at(0)).getStrikePrice() < tempPrice) && (tempPrice <= (vec.at(2)).getStrikePrice())) {
+    payOff = (vec.at(3)).getOptionPrice() + (vec.at(0)).getOptionPrice() - (vec.at(1)).getOptionPrice() - (vec.at(2)).getOptionPrice() - ((vec.at(2)).getStrikePrice() - tempPrice)
+    - (tempPrice - (vec.at(0)).getStrikePrice());
   } else {
     payOff = (vec.at(3)).getOptionPrice() + (vec.at(0)).getOptionPrice() - (vec.at(0)).getOptionPrice()
-    - (vec.at(2)).getOptionPrice() + (200 - (vec.at(2)).getStrikePrice()) - (200 - (vec.at(0)).getStrikePrice());
+    - (vec.at(2)).getOptionPrice() + (tempPrice - (vec.at(2)).getStrikePrice()) - (tempPrice - (vec.at(0)).getStrikePrice());
   }
 
   for (unsigned int i = 0; i < vec.size(); i++) {
