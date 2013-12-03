@@ -12,25 +12,45 @@ OPChooser is a tool to help you make options trading decision. That is, it analy
 - Template Pattern
 - Strategy Pattern
 
-
-## Build and Run
-Under the root directory
-```
-$ make
-$ OPChooser -h
-Allowed options:
-  -h [ --help ]         Print help messages.
-  -v [ --verbose ]      Print words with verbosity.
-  -o [ --output ] arg   Set logging output file.
-  -t [ --ticker ] arg   Set the name of ticker.
-  -d [ --date ] arg     Set expiration date for the given ticker.
-```
-
 ## Dependencies
 - [libcurl](http://curl.haxx.se/libcurl/)    (handling http request and response)
 - [jsoncpp](http://jsoncpp.sourceforge.net/) (parsing json format)
 - [boost](http://www.boost.org)              (useful libraries)
 
+## Overall Directory Structure
+
+At a high level, the structure looks roughly like this:
+
+```
+FE545-FinalProject/
+  |- include/
+  |  |- IOptionCollection.h    (Interface for Option Collection) 
+  |  |- IOptionIterator.h      (Interface for Option Iterator)
+  |  |- MyAppHelper.h          (Header file for Helper class)
+  |  |- Option.h               (Header file for Option model class) 
+  |  |- OptionCollection.h     (Header file for concreate Option Collection class)
+  |  |- OptionFactory.h        (Header file for Option Factory)
+  |  |- OptionIterator.h       (Header file for concreate Option Interator class) 
+  |  |- Restclient.h           (Header file for RestClient class)
+  |  |- Logger.h               (Header file for Logger class)
+  |  |- OptionFilter.h	       (Header file for options filter class)
+  |  |- TemplateOne.h	       (Header file for Template Method class)
+  |  |- Strategy.h	       (Header file for Strategy class)
+  |- source/
+  |  |- Main.cpp               (Main function)
+  |  |- MyAppHelper.cpp        (Implementation for Helper class)
+  |  |- Option.cpp             (Implementation for Option class)
+  |  |- OptionCollection.cpp   (Implementation for concreate Option Collection class)
+  |  |- OptionFactory.cpp      (Implementation for Option Factory class)
+  |  |- OptionIterator.cpp     (Implementation for concreate Option Iterator class)
+  |  |- Restclient.cpp         (Implementation for RestClient class)
+  |  |- Logger.cpp             (Implementation for Logger class)
+  |  |- OptionFilter.cpp       (Implementation for options filter class)
+  |  |- TemplateOne.cpp	       (Implementation for Template Method class)
+  |  |- Strategy.cpp	       (Implementation for Strategy class)
+  |- Makefile                  (Makefile for building this application)
+  |- README.md                 (Readme file for github)
+```
 
 ## Option Model
 
@@ -111,37 +131,15 @@ class Option {
 	LOGGER(DEBUG_FLAG, "hello " << "world"); => log message "hello world".
     ```
 
-## Overall Directory Structure
-
-At a high level, the structure looks roughly like this:
-
+## Build and Run
+Under the root directory
 ```
-FE545-FinalProject/
-  |- include/
-  |  |- IOptionCollection.h    (Interface for Option Collection) 
-  |  |- IOptionIterator.h      (Interface for Option Iterator)
-  |  |- MyAppHelper.h          (Header file for Helper class)
-  |  |- Option.h               (Header file for Option model class) 
-  |  |- OptionCollection.h     (Header file for concreate Option Collection class)
-  |  |- OptionFactory.h        (Header file for Option Factory)
-  |  |- OptionIterator.h       (Header file for concreate Option Interator class) 
-  |  |- Restclient.h           (Header file for RestClient class)
-  |  |- Logger.h               (Header file for Logger class)
-  |  |- OptionFilter.h	       (Header file for options filter class)
-  |  |- TemplateOne.h	       (Header file for Template Method class)
-  |  |- Strategy.h	       (Header file for Strategy class)
-  |- source/
-  |  |- Main.cpp               (Main function)
-  |  |- MyAppHelper.cpp        (Implementation for Helper class)
-  |  |- Option.cpp             (Implementation for Option class)
-  |  |- OptionCollection.cpp   (Implementation for concreate Option Collection class)
-  |  |- OptionFactory.cpp      (Implementation for Option Factory class)
-  |  |- OptionIterator.cpp     (Implementation for concreate Option Iterator class)
-  |  |- Restclient.cpp         (Implementation for RestClient class)
-  |  |- Logger.cpp             (Implementation for Logger class)
-  |  |- OptionFilter.cpp       (Implementation for options filter class)
-  |  |- TemplateOne.cpp	       (Implementation for Template Method class)
-  |  |- Strategy.cpp	       (Implementation for Strategy class)
-  |- Makefile                  (Makefile for building this application)
-  |- README.md                 (Readme file for github)
+$ make
+$ OPChooser -h
+Allowed options:
+  -h [ --help ]         Print help messages.
+  -v [ --verbose ]      Print words with verbosity.
+  -o [ --output ] arg   Set logging output file.
+  -t [ --ticker ] arg   Set the name of ticker.
+  -d [ --date ] arg     Set expiration date for the given ticker.
 ```
