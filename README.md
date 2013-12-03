@@ -135,7 +135,7 @@ class Option {
 Under the root directory
 ```
 $ make
-$ OPChooser -h
+$ ./OPChooser -h
 Allowed options:
   -h [ --help ]         Print help messages.
   -v [ --verbose ]      Print words with verbosity.
