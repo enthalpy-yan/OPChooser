@@ -24,7 +24,6 @@ MyAppHelper& MyAppHelper::getInstance() {
 }
 
 void MyAppHelper::StrategySet(vector<Option> v,multimap<double,vector<string> > &resultmap) {
-  LOGGER(DEBUG_FLAG, "Apply strategy to each of combinations...");
   double LVal;
   double RVal;
   Context* pcon;
@@ -51,7 +50,6 @@ void MyAppHelper::StrategySet(vector<Option> v,multimap<double,vector<string> > 
 }
 
 void MyAppHelper::Order(vector<Option> v,multimap<double,vector<string> > &resultmap) {
-  LOGGER(DEBUG_FLAG, "Started to find option combinations...");
   int lenght= v.size();
   vector<Option> newvector;
   vector<Option> finalresult;
