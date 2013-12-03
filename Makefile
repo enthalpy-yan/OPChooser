@@ -5,7 +5,7 @@ CFLAGS=-c -Wall
 LDFLAGS=-lcurl -ljsoncpp -lboost_program_options-mt -lboost_date_time-mt
 SOURCES=$(wildcard $(SOURCEDIR)/*.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=finalProject
+EXECUTABLE=OPChooser
 
 all: $(SOURCES) $(EXECUTABLE)
 	
