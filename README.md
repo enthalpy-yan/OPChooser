@@ -39,7 +39,7 @@ class Option {
 }
 ```
 
-## API Reference
+## Data Service API Reference
 
 ### OptionCollection
 
