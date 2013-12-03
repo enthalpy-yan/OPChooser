@@ -1,4 +1,4 @@
-#FE545-FinalProject
+#OPChooser
 
 ## About
 This is a final project for FE545: Design Patterns and Derivatives Pricing. 
