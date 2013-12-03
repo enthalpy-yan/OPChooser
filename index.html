@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Opchooser by enthalpy-yan</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Opchooser</h1>
+        <h2>terminal finance app that helps user make a better decision about options trading.</h2>
+        <a href="https://github.com/enthalpy-yan/OPChooser" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="opchooser" class="anchor" href="#opchooser"><span class="octicon octicon-link"></span></a>OPChooser</h1>
+
+<h2>
+<a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>About</h2>
+
+<p>OPChooser is a tool to help you make options trading decision. That is, it analyzes all of options retrieved by the given ticker symbol and then give you a set of options which has the max payoff. OPChooser is also a final project for Stevens Institute of Technology - FE545 Design Patterns and Derivatives Pricing. The Motivations for this project is to learn and practice Object Oriented Design Patterns. </p>
+
+<h2>
+<a name="patterns" class="anchor" href="#patterns"><span class="octicon octicon-link"></span></a>Patterns</h2>
+
+<ul>
+<li>Singleton Pattern</li>
+<li>Factory Pattern</li>
+<li>Iterator Pattern</li>
+<li>Template Pattern</li>
+<li>Strategy Pattern</li>
+</ul><h2>
+<a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h2>
+
+<ul>
+<li>
+<a href="http://curl.haxx.se/libcurl/">libcurl</a>    (handling http request and response)</li>
+<li>
+<a href="http://jsoncpp.sourceforge.net/">jsoncpp</a> (parsing json format)</li>
+<li>
+<a href="http://www.boost.org">boost</a>              (useful libraries)</li>
+</ul><h2>
+<a name="overall-directory-structure" class="anchor" href="#overall-directory-structure"><span class="octicon octicon-link"></span></a>Overall Directory Structure</h2>
+
+<p>At a high level, the structure looks roughly like this:</p>
+
+<pre><code>FE545-FinalProject/
+  |- include/
+  |  |- IOptionCollection.h    (Interface for Option Collection) 
+  |  |- IOptionIterator.h      (Interface for Option Iterator)
+  |  |- MyAppHelper.h          (Header file for Helper class)
+  |  |- Option.h               (Header file for Option model class) 
+  |  |- OptionCollection.h     (Header file for concreate Option Collection class)
+  |  |- OptionFactory.h        (Header file for Option Factory)
+  |  |- OptionIterator.h       (Header file for concreate Option Interator class) 
+  |  |- Restclient.h           (Header file for RestClient class)
+  |  |- Logger.h               (Header file for Logger class)
+  |  |- OptionFilter.h         (Header file for options filter class)
+  |  |- TemplateOne.h          (Header file for Template Method class)
+  |  |- Strategy.h         (Header file for Strategy class)
+  |- source/
+  |  |- Main.cpp               (Main function)
+  |  |- MyAppHelper.cpp        (Implementation for Helper class)
+  |  |- Option.cpp             (Implementation for Option class)
+  |  |- OptionCollection.cpp   (Implementation for concreate Option Collection class)
+  |  |- OptionFactory.cpp      (Implementation for Option Factory class)
+  |  |- OptionIterator.cpp     (Implementation for concreate Option Iterator class)
+  |  |- Restclient.cpp         (Implementation for RestClient class)
+  |  |- Logger.cpp             (Implementation for Logger class)
+  |  |- OptionFilter.cpp       (Implementation for options filter class)
+  |  |- TemplateOne.cpp        (Implementation for Template Method class)
+  |  |- Strategy.cpp           (Implementation for Strategy class)
+  |- Makefile                  (Makefile for building this application)
+  |- README.md                 (Readme file for github)
+</code></pre>
+
+<h2>
+<a name="option-model" class="anchor" href="#option-model"><span class="octicon octicon-link"></span></a>Option Model</h2>
+
+<pre><code>enum OptionType { CALL, PUT };
+class Option {
+    string stockName;
+    string optionSymbol;
+    double strikePrice;
+    double purchasePrice;
+    double optionPrice; // ask
+    OptionType optionType;
+    boost::gregorian::date purchaseDate;
+    boost::gregorian::date expirationDate;
+}
+</code></pre>
+
+<h2>
+<a name="data-service-api-reference" class="anchor" href="#data-service-api-reference"><span class="octicon octicon-link"></span></a>Data Service API Reference</h2>
+
+<h3>
+<a name="optioncollection" class="anchor" href="#optioncollection"><span class="octicon octicon-link"></span></a>OptionCollection</h3>
+
+<h5>
+<a name="this-is-a-container-class-used-to-saving-option-informations-basically-it-is-a-stdvectoroption" class="anchor" href="#this-is-a-container-class-used-to-saving-option-informations-basically-it-is-a-stdvectoroption"><span class="octicon octicon-link"></span></a>This is a container class used to saving option informations. Basically, it is a std::vector&lt;Option&gt;.</h5>
+
+<ul>
+<li>
+<p>getIterator()</p>
+
+<p>Returns a iterator for the collection.</p>
+
+<pre><code>OptionCollection optionList = GET_OPTIONS("GOOG", "2013-12", CALL); 
+
+IOptionIterator *iter = optionList.getIterator();
+
+for ( Option p = iter-&gt;firstOption(); iter-&gt;isDone() == false; p = iter-&gt;nextOption() ) {
+    std::cout &lt;&lt; p &lt;&lt; std::endl;
+}
+</code></pre>
+</li>
+</ul><h3>
+<a name="helper-class" class="anchor" href="#helper-class"><span class="octicon octicon-link"></span></a>Helper Class</h3>
+
+<h5>
+<a name="this-is-a-wrapper-class-for-the-functions-used-to-get-stockoption-related-informations" class="anchor" href="#this-is-a-wrapper-class-for-the-functions-used-to-get-stockoption-related-informations"><span class="octicon octicon-link"></span></a>This is a wrapper class for the functions used to get stock/option related informations.</h5>
+
+<ul>
+<li>
+<p>GET_STOCK_PRICE(stock_name)</p>
+
+<p>Returns the price of stock given in stock_name.</p>
+
+<pre><code>double price = GET_STOCK_PRICE("GOOG")   =&gt; get the price of GOOG.
+</code></pre>
+</li>
+<li>
+<p>GET_OPTIONS(stock_name, expiration_date, option_type)</p>
+
+<p>Returns the options list with the given arguments.</p>
+
+<pre><code>OptionCollection optionList = GET_OPTIONS("GOOG", "2013-12", CALL) =&gt; get all of GOOG's option(Type: call, expiration date: before 2013-12).
+</code></pre>
+</li>
+<li>
+<p>SEND_HTTP_REQUEST(request_url)</p>
+
+<p>Returns the response(string) of url given in request_url. Only HTTP GET method.</p>
+
+<pre><code>SEND_HTTP_REQUEST("http://www.example.org")
+</code></pre>
+</li>
+</ul><h3>
+<a name="logger-class" class="anchor" href="#logger-class"><span class="octicon octicon-link"></span></a>Logger Class</h3>
+
+<h5>
+<a name="this-is-a-logger-class-for-logging-informations" class="anchor" href="#this-is-a-logger-class-for-logging-informations"><span class="octicon octicon-link"></span></a>This is a logger class for logging informations.</h5>
+
+<ul>
+<li>
+<p>LOGGER_CONF(logfile_name, configuraitons, fileVerbosityLevel, screenVerbosityLevel)</p>
+
+<p>Configures the logger.</p>
+
+<pre><code>LOGGER_CONF("outputfile", Logger::file_on|Logger::screen_on, DEBUG_FLAG, ERROR_FLAG) =&gt; log debug info in logfile and error info on screen.
+LOGGER_CONF("", Logger::screen_on, DEBUG_FLAG, DEBUG_FLAG) =&gt; log debug info on screen.
+</code></pre>
+</li>
+<li>
+<p>LOGGER(log_flag, log_messages)</p>
+
+<p>Prints log messages.</p>
+
+<pre><code>LOGGER(DEBUG_FLAG, "hello " &lt;&lt; "world"); =&gt; log message "hello world".
+</code></pre>
+</li>
+</ul><h2>
+<a name="build-and-run" class="anchor" href="#build-and-run"><span class="octicon octicon-link"></span></a>Build and Run</h2>
+
+<p>Under the root directory</p>
+
+<pre><code>$ make
+$ OPChooser -h
+Allowed options:
+  -h [ --help ]         Print help messages.
+  -v [ --verbose ]      Print words with verbosity.
+  -o [ --output ] arg   Set logging output file.
+  -t [ --ticker ] arg   Set the name of ticker.
+  -d [ --date ] arg     Set expiration date for the given ticker.
+</code></pre>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/enthalpy-yan/OPChooser/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/enthalpy-yan/OPChooser/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/enthalpy-yan/OPChooser"></a> is maintained by <a href="https://github.com/enthalpy-yan">enthalpy-yan</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
