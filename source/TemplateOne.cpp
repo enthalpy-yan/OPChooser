@@ -83,10 +83,12 @@ void TemplateOne::doThirdCheck(){
 	string input;
 	std::cin >> input;
 
+	while (!(resultMap.count(input) > 0)) {
+		std::cout << " Invalid date, please input again: ";
+		std::cin >> input;
+	}
 
-	std::map< std::string, std::vector<Option> >::iterator result;
-	result = resultMap.find(input);
-	result_ = result->second;
+	result_ = resultMap.find(input)->second;
 	
 	LOGGER(DEBUG_FLAG, "The third filter has been finished!");
 	// for (vector<Option>::iterator it = result_.begin() ; it != result_.end(); ++it)
