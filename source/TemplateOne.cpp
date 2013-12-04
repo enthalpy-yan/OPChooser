@@ -29,6 +29,7 @@ void TemplateOne::doSecondCheck(){
 	for( iterCall = call_.begin(), iterPut = put_.begin(); iterCall != call_.end();){
 		boost::gregorian::date purchaseDate = boost::gregorian::from_simple_string((*iterCall).getPurchaseDate());
 		boost::gregorian::date expirationDate = boost::gregorian::from_simple_string((*iterCall).getExpirationDate());
+		
 		boost::gregorian::date_period dp( purchaseDate, expirationDate );
 
 		double a = (*iterCall).getOptionPrice() + (*iterCall).getStrikePrice() * exp(-0.08 * dp.length().days() / 365);
@@ -91,6 +92,4 @@ void TemplateOne::doThirdCheck(){
 	result_ = resultMap.find(input)->second;
 	
 	LOGGER(DEBUG_FLAG, "The third filter has been finished!");
-	// for (vector<Option>::iterator it = result_.begin() ; it != result_.end(); ++it)
-	// 		std::cout << *it << endl;
 }

@@ -1,7 +1,7 @@
 CC=g++
-INCLUDE=-I./include
+INCLUDE=-I./include -I./Shared
 SOURCEDIR=./source
-CFLAGS=-c -Wall  
+CFLAGS=-DIB_USE_STD_STRING -Wall -c
 LDFLAGS=-lcurl -ljsoncpp -lboost_program_options-mt -lboost_date_time-mt
 SOURCES=$(wildcard $(SOURCEDIR)/*.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)

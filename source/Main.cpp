@@ -3,12 +3,23 @@
 #include <string>
 #include <boost/program_options.hpp>
 #include <map>
+#ifdef _WIN32
+# include <windows.h>
+# define sleep( seconds) Sleep( seconds * 1000);
+#else
+# include <unistd.h>
+#endif
+
 namespace po = boost::program_options;
 
+#include "PosixTestClient.h"
 #include "MyAppHelper.h"
 #include "Logger.h"
 #include "OptionFilter.h"
 #include "TemplateOne.h"
+
+const unsigned MAX_ATTEMPTS = 1;
+const unsigned SLEEP_TIME = 10;
 
 int main(int ac, char* av[]) {
   LOGGER_CONF("", Logger::screen_on, ERROR_FLAG, ERROR_FLAG);
@@ -22,8 +33,8 @@ int main(int ac, char* av[]) {
       ("output,o", po::value<std::string>(), "Set logging output file.")
       ("ticker,t", po::value<std::string>()->required(), "Set the name of ticker.")
       ("date,d", po::value<std::string>()->required(), "Set expiration date for the given ticker.")
-    ;
-
+      ("order", "Place an order in IB with the results. (Demo)");
+      
     po::variables_map vm;
     po::store(
       po::command_line_parser(ac,av)
@@ -55,24 +66,24 @@ int main(int ac, char* av[]) {
     OptionFilter *of = new TemplateOne(optionListCall, optionListPut);
     vector<Option> resultVector = of->filter();
 
-    multimap<double,vector<string> > resultMap;
+    multimap<double,vector<Option> > resultMap;
 
     ORDER(resultVector, resultMap);
   
     LOGGER(DEBUG_FLAG, "the size of portfolio is: " << resultMap.size());
     
     double max;
-    map<double,vector<string> >::iterator it;
+    map<double,vector<Option> >::iterator it;
 
     for (it = resultMap.begin(); it != resultMap.end(); it++) {  
-      if(it == resultMap.begin())
+      if(it == resultMap.begin()) {
          max = it->first;
-      else {
-        if(it->first > max)
+         cout << max << endl;
+      } else if (it->first > max) {
            max = it->first;
-        else
+           cout << max << endl;
+      } else
           continue;
-      }
     }
 
     cout << "============================================" << endl;
@@ -87,6 +98,40 @@ int main(int ac, char* av[]) {
     cout << "  PayOff: " << max << endl;
     cout << "============================================" << endl;
 
+    if (!vm.count("order")) {
+      return 0;
+    }
+
+    int clientId = 0;
+    unsigned attempt = 0;
+
+    printf( "Start of POSIX Socket Client Test %u\n", attempt);
+
+    for (;;) {
+      ++attempt;
+      printf( "Attempt %u of %u\n", attempt, MAX_ATTEMPTS);
+
+      IB::PosixTestClient client;
+
+      client.connect( "127.0.0.1", 7496, clientId);
+
+      while (client.isConnected()) {
+        vector<Option> resultVector = it->second;
+        client.processMessages(resultVector);
+      }
+
+      if( attempt >= MAX_ATTEMPTS) {
+        break;
+      }
+
+      printf( "Sleeping %u seconds before next attempt\n", SLEEP_TIME);
+      sleep( SLEEP_TIME);
+    }
+
+    printf ( "End of POSIX Socket Client Test\n");
+
+    return 0;
+
   } catch (std::length_error) { 
     LOGGER(ERROR_FLAG, "!!!Invalid ticker name.");
   } catch(exception& e) {
@@ -96,5 +141,4 @@ int main(int ac, char* av[]) {
     LOGGER(ERROR_FLAG, "Exception of unknown type!");
   }
 
-  return 0;
 }

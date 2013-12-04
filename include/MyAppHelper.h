@@ -56,8 +56,8 @@ public:
   OptionCollection getOptionListByOptionType(std::string stockSymbol, std::string expDate, OptionType otype);
   double getStockPrice(const std::string& stockName);
   double s_to_d(const std::string& strPrice);
-  void StrategySet(vector<Option> v,multimap<double,vector<string> > &resultmap);
-  void Order(vector<Option> v,multimap<double,vector<string> > &resultmap);
+  void StrategySet(vector<Option> v,multimap<double,vector<Option> > &resultmap);
+  void Order(vector<Option> v,multimap<double,vector<Option> > &resultmap);
 };
 
 #endif

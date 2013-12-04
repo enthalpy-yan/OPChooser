@@ -13,7 +13,7 @@ class Strategy {
 
 public:
   ~Strategy();
-  virtual void AlgrithmInterface(vector<Option>, multimap<double, vector<string> >&);
+  virtual void AlgrithmInterface(vector<Option>, multimap<double, vector<Option> >&);
   Strategy();
 
 };
@@ -23,7 +23,7 @@ class StrategyA : public Strategy {
 public:
   StrategyA();
   ~StrategyA();
-  void AlgrithmInterface(vector<Option>, multimap<double, vector<string> >&);
+  void AlgrithmInterface(vector<Option>, multimap<double, vector<Option> >&);
 
 };
 
@@ -32,7 +32,7 @@ class StrategyB : public Strategy {
 public:
   StrategyB();
   ~StrategyB();
-  void AlgrithmInterface(vector<Option>,multimap<double, vector<string> >&);
+  void AlgrithmInterface(vector<Option>,multimap<double, vector<Option> >&);
 
 };
 
@@ -43,7 +43,7 @@ class Context {
 public:
   Context(Strategy*);
   ~Context();
-  void DoAction(vector<Option>, multimap<double,vector<string> >&);
+  void DoAction(vector<Option>, multimap<double,vector<Option> >&);
 private:
   Strategy* strategy;
 

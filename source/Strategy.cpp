@@ -8,13 +8,13 @@ Strategy::Strategy() {}
 
 Strategy::~Strategy() {}
 
-void Strategy::AlgrithmInterface(vector<Option>, multimap<double, vector<string> >&) {}
+void Strategy::AlgrithmInterface(vector<Option>, multimap<double, vector<Option> >&) {}
 
 StrategyA::StrategyA() {} 
 
 StrategyA::~StrategyA() {}
 
-void StrategyA::AlgrithmInterface(vector<Option> vec, multimap<double, vector<string> > &resultmap) {
+void StrategyA::AlgrithmInterface(vector<Option> vec, multimap<double, vector<Option> > &resultmap) {
 
   LOGGER(DEBUG_FLAG, "Applied Strategy A to Combinations: " 
                       << vec[0].getOptionSymbol() << " "
@@ -23,7 +23,7 @@ void StrategyA::AlgrithmInterface(vector<Option> vec, multimap<double, vector<st
                       << vec[3].getOptionSymbol());
 
   double payOff;
-  vector<string> temp;
+  vector<Option> temp;
 
   double tempPrice = vec[0].getStrikePrice() + 20;
 
@@ -39,10 +39,10 @@ void StrategyA::AlgrithmInterface(vector<Option> vec, multimap<double, vector<st
   }
 
   for ( unsigned int i = 0 ; i < vec.size(); i++ ) {
-    temp.push_back(vec.at(i).getOptionSymbol());
+    temp.push_back(vec.at(i));
   }
 
-  typedef pair<double, vector<string> > Pair;
+  typedef pair<double, vector<Option> > Pair;
   resultmap.insert(Pair(payOff,temp));
 }
 
@@ -50,7 +50,7 @@ StrategyB::StrategyB() {}
 
 StrategyB::~StrategyB() {}
 
-void StrategyB::AlgrithmInterface(vector<Option> vec, multimap<double, vector<string> > &resultmap) {
+void StrategyB::AlgrithmInterface(vector<Option> vec, multimap<double, vector<Option> > &resultmap) {
 
   LOGGER(DEBUG_FLAG, "Applied Strategy B to Combinations: " 
                       << vec[0].getOptionSymbol() << " "
@@ -59,7 +59,7 @@ void StrategyB::AlgrithmInterface(vector<Option> vec, multimap<double, vector<st
                       << vec[3].getOptionSymbol());
 
   double payOff;
-  vector<string> temp;
+  vector<Option> temp;
   double tempPrice = vec[0].getStrikePrice() + 20;
 
   if (tempPrice <= (vec[0]).getStrikePrice()) {
@@ -75,10 +75,10 @@ void StrategyB::AlgrithmInterface(vector<Option> vec, multimap<double, vector<st
   }
 
   for (unsigned int i = 0; i < vec.size(); i++) {
-    temp.push_back(vec.at(i).getOptionSymbol());
+    temp.push_back(vec.at(i));
   }
 
-  typedef pair<double, vector<string> > Pair;
+  typedef pair<double, vector<Option> > Pair;
   resultmap.insert(Pair(payOff,temp));
 }
  
@@ -89,6 +89,6 @@ Context::Context(Strategy* strategy) {
 Context::~Context() {
 }
  
-void Context::DoAction(vector<Option> vec, multimap<double, vector<string> > &resultmap) {
+void Context::DoAction(vector<Option> vec, multimap<double, vector<Option> > &resultmap) {
   this->strategy->AlgrithmInterface(vec,resultmap);
 }
