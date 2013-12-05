@@ -156,5 +156,5 @@ Allowed options:
   -o [ --output ] arg   Set logging output file.
   -t [ --ticker ] arg   Set the name of ticker.
   -d [ --date ] arg     Set expiration date for the given ticker.
-  -order                place order when finished calculate using Interative Broker Socker Client(Branch iborder).
+  -order                place order when finished calculation using Interative Broker Socker Client(Branch iborder).
 ```
