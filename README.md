@@ -4,6 +4,10 @@
 
 OPChooser is a tool to help you to make options trading decision. That is, it analyzes all of options retrieved by the given ticker symbol and then give you a set of options which has the max payoff. OPChooser is also a final project for Stevens Institute of Technology - FE545 Design Patterns and Derivatives Pricing. The Motivations for this project is to learn and practice Object Oriented Design Patterns. 
 
+## Branch
+- master 
+- iborder (support place order *Only for demo*)
+
 ## Patterns
 
 - Singleton Pattern
@@ -24,32 +28,39 @@ At a high level, the structure looks roughly like this:
 ```
 FE545-FinalProject/
   |- include/
-  |  |- IOptionCollection.h    (Interface for Option Collection) 
-  |  |- IOptionIterator.h      (Interface for Option Iterator)
-  |  |- MyAppHelper.h          (Header file for Helper class)
-  |  |- Option.h               (Header file for Option model class) 
-  |  |- OptionCollection.h     (Header file for concreate Option Collection class)
-  |  |- OptionFactory.h        (Header file for Option Factory)
-  |  |- OptionIterator.h       (Header file for concreate Option Interator class) 
-  |  |- Restclient.h           (Header file for RestClient class)
-  |  |- Logger.h               (Header file for Logger class)
-  |  |- OptionFilter.h	       (Header file for options filter class)
-  |  |- TemplateOne.h	       (Header file for Template Method class)
-  |  |- Strategy.h	       (Header file for Strategy class)
+  |  |- IOptionCollection.h           (Interface for Option Collection) 
+  |  |- IOptionIterator.h             (Interface for Option Iterator)
+  |  |- MyAppHelper.h                 (Header file for Helper class)
+  |  |- Option.h                      (Header file for Option model class) 
+  |  |- OptionCollection.h            (Header file for concreate Option Collection class)
+  |  |- OptionFactory.h               (Header file for Option Factory)
+  |  |- OptionIterator.h              (Header file for concreate Option Interator class) 
+  |  |- Restclient.h                  (Header file for RestClient class)
+  |  |- Logger.h                      (Header file for Logger class)
+  |  |- OptionFilter.h	              (Header file for options filter class)
+  |  |- TemplateOne.h	              (Header file for Template Method class)
+  |  |- Strategy.h	              (Header file for Strategy class)
+  |  |- EPosixClientSocket.h          (Branch iborder)
+  |  |- EPosixClientSocketPlatform.h  (Branch iborder)
+  |  |- PosixTestClient.h             (Branch iborder)
   |- source/
-  |  |- Main.cpp               (Main function)
-  |  |- MyAppHelper.cpp        (Implementation for Helper class)
-  |  |- Option.cpp             (Implementation for Option class)
-  |  |- OptionCollection.cpp   (Implementation for concreate Option Collection class)
-  |  |- OptionFactory.cpp      (Implementation for Option Factory class)
-  |  |- OptionIterator.cpp     (Implementation for concreate Option Iterator class)
-  |  |- Restclient.cpp         (Implementation for RestClient class)
-  |  |- Logger.cpp             (Implementation for Logger class)
-  |  |- OptionFilter.cpp       (Implementation for options filter class)
-  |  |- TemplateOne.cpp	       (Implementation for Template Method class)
-  |  |- Strategy.cpp	       (Implementation for Strategy class)
-  |- Makefile                  (Makefile for building this application)
-  |- README.md                 (Readme file for github)
+  |  |- Main.cpp                      (Main function)
+  |  |- MyAppHelper.cpp               (Implementation for Helper class)
+  |  |- Option.cpp                    (Implementation for Option class)
+  |  |- OptionCollection.cpp          (Implementation for concreate Option Collection class)
+  |  |- OptionFactory.cpp             (Implementation for Option Factory class)
+  |  |- OptionIterator.cpp            (Implementation for concreate Option Iterator class)
+  |  |- Restclient.cpp                (Implementation for RestClient class)
+  |  |- Logger.cpp                    (Implementation for Logger class)
+  |  |- OptionFilter.cpp              (Implementation for options filter class)
+  |  |- TemplateOne.cpp	              (Implementation for Template Method class)
+  |  |- Strategy.cpp	              (Implementation for Strategy class)
+  |  |- EClientSocketBase.cpp         (Branch iborder)
+  |  |- PosixTestClient.cpp           (Branch iborder)
+  |  |- EPosixClientSocket.cpp        (Branch iborder)
+  |- shared/
+  |- Makefile                         (Makefile for building this application)
+  |- README.md                        (Readme file for github)
 ```
 
 ## Option Model
@@ -142,4 +153,5 @@ Allowed options:
   -o [ --output ] arg   Set logging output file.
   -t [ --ticker ] arg   Set the name of ticker.
   -d [ --date ] arg     Set expiration date for the given ticker.
+  -order                place order when finished calculate using Interative Broker Socker Client(Branch iborder).
 ```
