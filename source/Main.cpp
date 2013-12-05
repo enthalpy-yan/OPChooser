@@ -24,8 +24,15 @@ const unsigned SLEEP_TIME = 10;
 int main(int ac, char* av[]) {
   LOGGER_CONF("", Logger::screen_on, ERROR_FLAG, ERROR_FLAG);
 
-  try {
+  std::cout << std::endl;
+  std::cout << "******************************************************************" << std::endl;
+  std::cout << "*                                                                *" << std::endl;
+  std::cout << "*    OPChooser Version 0.1                                       *" << std::endl;
+  std::cout << "*                                          FE545 Final Project   *" << std::endl;
+  std::cout << "*                                                                *" << std::endl;
+  std::cout << "******************************************************************" << std::endl << std::endl;
 
+  try {
     po::options_description desc("Allowed options");
     desc.add_options()
       ("help,h", "Print help messages.")
@@ -60,6 +67,13 @@ int main(int ac, char* av[]) {
       LOGGER_CONF(vm["output"].as<std::string>(), Logger::file_on, DEBUG_FLAG, DEBUG_FLAG);
     }  
 
+    std::cout << "-----------------------" << std::endl;
+    std::cout << "Ticker:  " << vm["ticker"].as<std::string>() << std::endl;
+    std::cout << "ExpDate: " << vm["date"].as<std::string>()   << std::endl;
+    std::cout << "-----------------------\n" << std::endl;
+
+    std::cout << "Please wait...\n" << std::endl;
+
     OptionCollection optionListCall = GET_OPTIONS(vm["ticker"].as<std::string>(), vm["date"].as<std::string>(), CALL);
     OptionCollection optionListPut = GET_OPTIONS(vm["ticker"].as<std::string>(), vm["date"].as<std::string>(), PUT);
 
@@ -78,21 +92,19 @@ int main(int ac, char* av[]) {
     for (it = resultMap.begin(); it != resultMap.end(); it++) {  
       if(it == resultMap.begin()) {
          max = it->first;
-         cout << max << endl;
       } else if (it->first > max) {
            max = it->first;
-           cout << max << endl;
       } else
           continue;
     }
 
-    cout << "============================================" << endl;
+    cout << "\n============================================" << endl;
     cout << "  The optimum portfolio has been selected" << endl;
     it = resultMap.find(max);
     cout << endl;
 
     for(unsigned int i = 0; i < it->second.size(); i++)
-      cout << "            " << it->second.at(i) << endl;
+      cout << "            " << it->second[i].getOptionSymbol() << endl;
 
     cout << endl;
     cout << "  PayOff: " << max << endl;
@@ -105,11 +117,10 @@ int main(int ac, char* av[]) {
     int clientId = 0;
     unsigned attempt = 0;
 
-    printf( "Start of POSIX Socket Client Test %u\n", attempt);
+    LOGGER(DEBUG_FLAG, "Started a POSIX Socket Client " << attempt);
 
     for (;;) {
       ++attempt;
-      printf( "Attempt %u of %u\n", attempt, MAX_ATTEMPTS);
 
       IB::PosixTestClient client;
 
@@ -124,11 +135,11 @@ int main(int ac, char* av[]) {
         break;
       }
 
-      printf( "Sleeping %u seconds before next attempt\n", SLEEP_TIME);
+      LOGGER(DEBUG_FLAG, "Sleeping " << SLEEP_TIME << " seconds before next attempt");
       sleep( SLEEP_TIME);
     }
 
-    printf ( "End of POSIX Socket Client Test\n");
+    LOGGER(DEBUG_FLAG, "Closed POSIX Socket Client");
 
     return 0;
 

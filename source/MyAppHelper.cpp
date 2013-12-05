@@ -145,7 +145,7 @@ std::string MyAppHelper::buildYQLQuery(string query, string where1, string where
   yqlQuery.replace(yqlQuery.find("[o_name]"), 8, where1);
   yqlQuery.replace(yqlQuery.find("[o_exp_date]"), 12, where2);
 
-  LOGGER(DEBUG_FLAG, "YQL query is " << yqlQuery);
+  LOGGER(DEBUG_FLAG, "YQL Query *** " << yqlQuery << " ***");
 
   string request(MyAppHelper::YAHOO_YQL_API_PREFIXURL);
   request.append(curl_escape(yqlQuery.c_str(), yqlQuery.size()));

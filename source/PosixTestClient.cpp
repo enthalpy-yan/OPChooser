@@ -1,8 +1,6 @@
 #include "PosixTestClient.h"
 
 #include "EPosixClientSocket.h"
-/* In this example we just include the platform header to have select(). In real
-   life you should include the needed headers from your system. */
 #include "EPosixClientSocketPlatform.h"
 
 #include "Contract.h"
@@ -23,8 +21,6 @@ namespace IB {
 const int PING_DEADLINE = 2; // seconds
 const int SLEEP_BETWEEN_PINGS = 30; // seconds
 
-///////////////////////////////////////////////////////////
-// member funcs
 PosixTestClient::PosixTestClient()
 	: m_pClient(new EPosixClientSocket(this))
 	, m_state(ST_CONNECT)
@@ -40,15 +36,15 @@ PosixTestClient::~PosixTestClient()
 bool PosixTestClient::connect(const char *host, unsigned int port, int clientId)
 {
 	// trying to connect
-	printf( "Connecting to %s:%u clientId:%d\n", !( host && *host) ? "127.0.0.1" : host, port, clientId);
+	LOGGER(DEBUG_FLAG, "Connecting to " << "127.0.0.1:7469 clientId: " << clientId);
 
 	bool bRes = m_pClient->eConnect2( host, port, clientId);
 
 	if (bRes) {
-		printf( "Connected to %s:%u clientId:%d\n", !( host && *host) ? "127.0.0.1" : host, port, clientId);
+		LOGGER(DEBUG_FLAG, "Connected to " << "127.0.0.1:7469 clientId: " << clientId);
 	}
 	else
-		printf( "Cannot connect to %s:%u clientId:%d\n", !( host && *host) ? "127.0.0.1" : host, port, clientId);
+		LOGGER(DEBUG_FLAG, "Cannot connect to 127.0.0.1:7469 clientId: " <<  clientId);
 
 	return bRes;
 }
@@ -57,7 +53,7 @@ void PosixTestClient::disconnect() const
 {
 	m_pClient->eDisconnect();
 
-	printf ( "Disconnected\n");
+	LOGGER(DEBUG_FLAG, "Disconnected");
 }
 
 bool PosixTestClient::isConnected() const
@@ -147,7 +143,7 @@ void PosixTestClient::processMessages(vector<Option>& vec)
 // methods
 void PosixTestClient::reqCurrentTime()
 {
-	printf( "Requesting Current Time\n");
+	LOGGER(DEBUG_FLAG, "Requesting Current Time");
 
 	// set ping deadline to "now + n seconds"
 	m_sleepDeadline = time( NULL) + PING_DEADLINE;
@@ -185,8 +181,6 @@ Order createOrder(Option& opt) {
 	tempOrder.orderType = "LMT";
 	tempOrder.lmtPrice = opt.getOptionPrice();
 
-	std::cout << tempOrder.lmtPrice << std::endl;
-
 	return tempOrder;
 }
 
@@ -217,7 +211,7 @@ void PosixTestClient::placeOrder(vector<Option>& vec)
 
 void PosixTestClient::cancelOrder()
 {
-	printf( "Cancelling Order %ld\n", m_orderId);
+	LOGGER(DEBUG_FLAG, "Cancelling Order " << m_orderId);
 
 	m_state = ST_CANCELORDER_ACK;
 	m_pClient->cancelOrder(m_orderId);
@@ -237,7 +231,7 @@ void PosixTestClient::orderStatus( OrderId orderId, const IBString &status, int 
 		if( m_state == ST_CANCELORDER_ACK && status == "Cancelled")
 			m_state = ST_PING;
 
-		printf( "Order: id=%ld, status=%s\n", orderId, status.c_str());
+		LOGGER(DEBUG_FLAG,  "Order: id=" << orderId << ", status=" << status.c_str());
 		disconnect();
 	}
 }
@@ -252,9 +246,6 @@ void PosixTestClient::nextValidId( OrderId orderId)
 void PosixTestClient::currentTime( long time)
 {
 	if ( m_state == ST_PING_ACK) {
-		time_t t = ( time_t)time;
-		struct tm * timeinfo = localtime ( &t);
-		printf( "The current date/time is: %s", asctime( timeinfo));
 
 		time_t now = ::time(NULL);
 		m_sleepDeadline = now + SLEEP_BETWEEN_PINGS;
@@ -265,8 +256,7 @@ void PosixTestClient::currentTime( long time)
 
 void PosixTestClient::error(const int id, const int errorCode, const IBString errorString)
 {
-	printf( "Error id=%d, errorCode=%d, msg=%s\n", id, errorCode, errorString.c_str());
-
+	LOGGER(ERROR_FLAG, "Error id=" << id << ",errorCode=" << errorCode << ", msg=" << errorString.c_str());
 	if( id == -1 && errorCode == 1100) // if "Connectivity between IB and TWS has been lost"
 		disconnect();
 }
