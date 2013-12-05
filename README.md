@@ -2,7 +2,7 @@
 
 ## About
 
-OPChooser is a tool to help you to make options trading decision. That is, it analyzes all of options retrieved by the given ticker symbol and then give you a set of options which has the max payoff. OPChooser is also a final project for Stevens Institute of Technology - FE545 Design Patterns and Derivatives Pricing. The Motivations for this project is to learn and practice Object Oriented Design Patterns. 
+OPChooser is a tool to help you to make options trading decision. That is, it analyzes all of options retrieved by the given ticker symbol and then give you a set of options which has the max payoff.(Note: With the demo version(iborder branch), you could place an order after getting the result.) OPChooser is also a final project for Stevens Institute of Technology - FE545 Design Patterns and Derivatives Pricing. The Motivations for this project is to learn and practice Object Oriented Design Patterns. 
 
 ## Branch
 
@@ -41,7 +41,7 @@ FE545-FinalProject/
   |  |- Logger.h                      (Header file for Logger class)
   |  |- OptionFilter.h	              (Header file for options filter class)
   |  |- TemplateOne.h	              (Header file for Template Method class)
-  |  |- Strategy.h	              (Header file for Strategy class)
+  |  |- Strategy.h                    (Header file for Strategy class)
   |  |- EPosixClientSocket.h          (Branch iborder)
   |  |- EPosixClientSocketPlatform.h  (Branch iborder)
   |  |- PosixTestClient.h             (Branch iborder)
