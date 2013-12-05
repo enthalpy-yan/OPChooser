@@ -1,33 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Opchooser by enthalpy-yan</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Opchooser : terminal finance app that helps user make a better decision about options trading." />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Opchooser</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Opchooser</h1>
-        <p>terminal finance app that helps user make a better decision about options trading.</p>
 
-        <p class="view"><a href="https://github.com/enthalpy-yan/OPChooser">View the Project on GitHub <small>enthalpy-yan/OPChooser</small></a></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/enthalpy-yan/OPChooser">View on GitHub</a>
 
+          <h1 id="project_title">Opchooser</h1>
+          <h2 id="project_tagline">terminal finance app that helps user make a better decision about options trading.</h2>
 
-        <ul>
-          <li><a href="https://github.com/enthalpy-yan/OPChooser/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/enthalpy-yan/OPChooser/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/enthalpy-yan/OPChooser">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/enthalpy-yan/OPChooser/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/enthalpy-yan/OPChooser/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>
 <a name="opchooser" class="anchor" href="#opchooser"><span class="octicon octicon-link"></span></a>OPChooser</h1>
 
@@ -37,6 +40,13 @@
 <p>OPChooser is a tool to help you to make options trading decision. That is, it analyzes all of options retrieved by the given ticker symbol and then give you a set of options which has the max payoff. OPChooser is also a final project for Stevens Institute of Technology - FE545 Design Patterns and Derivatives Pricing. The Motivations for this project is to learn and practice Object Oriented Design Patterns. </p>
 
 <h2>
+<a name="branch" class="anchor" href="#branch"><span class="octicon octicon-link"></span></a>Branch</h2>
+
+<ul>
+<li>master </li>
+<li>iborder (support placing order) <em>demo version</em>
+</li>
+</ul><h2>
 <a name="patterns" class="anchor" href="#patterns"><span class="octicon octicon-link"></span></a>Patterns</h2>
 
 <ul>
@@ -55,6 +65,8 @@
 <a href="http://jsoncpp.sourceforge.net/">jsoncpp</a> (parsing json format)</li>
 <li>
 <a href="http://www.boost.org">boost</a>              (useful libraries)</li>
+<li>
+<a href="https://github.com/rudimeier/twsapi">rudimeier's twsapi</a> (used for placeing order in branch iborder)</li>
 </ul><h2>
 <a name="overall-directory-structure" class="anchor" href="#overall-directory-structure"><span class="octicon octicon-link"></span></a>Overall Directory Structure</h2>
 
@@ -62,32 +74,39 @@
 
 <pre><code>FE545-FinalProject/
   |- include/
-  |  |- IOptionCollection.h    (Interface for Option Collection) 
-  |  |- IOptionIterator.h      (Interface for Option Iterator)
-  |  |- MyAppHelper.h          (Header file for Helper class)
-  |  |- Option.h               (Header file for Option model class) 
-  |  |- OptionCollection.h     (Header file for concreate Option Collection class)
-  |  |- OptionFactory.h        (Header file for Option Factory)
-  |  |- OptionIterator.h       (Header file for concreate Option Interator class) 
-  |  |- Restclient.h           (Header file for RestClient class)
-  |  |- Logger.h               (Header file for Logger class)
-  |  |- OptionFilter.h         (Header file for options filter class)
-  |  |- TemplateOne.h          (Header file for Template Method class)
-  |  |- Strategy.h         (Header file for Strategy class)
+  |  |- IOptionCollection.h           (Interface for Option Collection) 
+  |  |- IOptionIterator.h             (Interface for Option Iterator)
+  |  |- MyAppHelper.h                 (Header file for Helper class)
+  |  |- Option.h                      (Header file for Option model class) 
+  |  |- OptionCollection.h            (Header file for concreate Option Collection class)
+  |  |- OptionFactory.h               (Header file for Option Factory)
+  |  |- OptionIterator.h              (Header file for concreate Option Interator class) 
+  |  |- Restclient.h                  (Header file for RestClient class)
+  |  |- Logger.h                      (Header file for Logger class)
+  |  |- OptionFilter.h                (Header file for options filter class)
+  |  |- TemplateOne.h                 (Header file for Template Method class)
+  |  |- Strategy.h                (Header file for Strategy class)
+  |  |- EPosixClientSocket.h          (Branch iborder)
+  |  |- EPosixClientSocketPlatform.h  (Branch iborder)
+  |  |- PosixTestClient.h             (Branch iborder)
   |- source/
-  |  |- Main.cpp               (Main function)
-  |  |- MyAppHelper.cpp        (Implementation for Helper class)
-  |  |- Option.cpp             (Implementation for Option class)
-  |  |- OptionCollection.cpp   (Implementation for concreate Option Collection class)
-  |  |- OptionFactory.cpp      (Implementation for Option Factory class)
-  |  |- OptionIterator.cpp     (Implementation for concreate Option Iterator class)
-  |  |- Restclient.cpp         (Implementation for RestClient class)
-  |  |- Logger.cpp             (Implementation for Logger class)
-  |  |- OptionFilter.cpp       (Implementation for options filter class)
-  |  |- TemplateOne.cpp        (Implementation for Template Method class)
-  |  |- Strategy.cpp           (Implementation for Strategy class)
-  |- Makefile                  (Makefile for building this application)
-  |- README.md                 (Readme file for github)
+  |  |- Main.cpp                      (Main function)
+  |  |- MyAppHelper.cpp               (Implementation for Helper class)
+  |  |- Option.cpp                    (Implementation for Option class)
+  |  |- OptionCollection.cpp          (Implementation for concreate Option Collection class)
+  |  |- OptionFactory.cpp             (Implementation for Option Factory class)
+  |  |- OptionIterator.cpp            (Implementation for concreate Option Iterator class)
+  |  |- Restclient.cpp                (Implementation for RestClient class)
+  |  |- Logger.cpp                    (Implementation for Logger class)
+  |  |- OptionFilter.cpp              (Implementation for options filter class)
+  |  |- TemplateOne.cpp               (Implementation for Template Method class)
+  |  |- Strategy.cpp                  (Implementation for Strategy class)
+  |  |- EClientSocketBase.cpp         (Branch iborder)
+  |  |- PosixTestClient.cpp           (Branch iborder)
+  |  |- EPosixClientSocket.cpp        (Branch iborder)
+  |- shared/
+  |- Makefile                         (Makefile for building this application)
+  |- README.md                        (Readme file for github)
 </code></pre>
 
 <h2>
@@ -186,11 +205,12 @@ LOGGER_CONF("", Logger::screen_on, DEBUG_FLAG, DEBUG_FLAG) =&gt; log debug info 
 </code></pre>
 </li>
 </ul><h2>
-<a name="build-and-run" class="anchor" href="#build-and-run"><span class="octicon octicon-link"></span></a>Build and Run</h2>
+<a name="download-build-and-run" class="anchor" href="#download-build-and-run"><span class="octicon octicon-link"></span></a>Download Build and Run</h2>
 
 <p>Under the root directory</p>
 
-<pre><code>$ make
+<pre><code>$ git checkout iborder (switch to branch iborder in order to supporting place order)
+$ make
 $ ./OPChooser -h
 Allowed options:
   -h [ --help ]         Print help messages.
@@ -198,14 +218,20 @@ Allowed options:
   -o [ --output ] arg   Set logging output file.
   -t [ --ticker ] arg   Set the name of ticker.
   -d [ --date ] arg     Set expiration date for the given ticker.
+  -order                place order when finished calculation using Interative Broker Socker Client(Branch iborder).
 </code></pre>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/enthalpy-yan">enthalpy-yan</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Opchooser maintained by <a href="https://github.com/enthalpy-yan">enthalpy-yan</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
+
   </body>
 </html>
