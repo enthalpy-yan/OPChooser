@@ -144,9 +144,10 @@ class Option {
 	LOGGER(DEBUG_FLAG, "hello " << "world"); => log message "hello world".
     ```
 
-## Build and Run
+## Download Build and Run
 Under the root directory
 ```
+$ git checkout iborder (switch to branch iborder in order to supporting place order)
 $ make
 $ ./OPChooser -h
 Allowed options:
