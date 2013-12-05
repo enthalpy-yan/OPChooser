@@ -13,6 +13,14 @@ namespace po = boost::program_options;
 int main(int ac, char* av[]) {
   LOGGER_CONF("", Logger::screen_on, ERROR_FLAG, ERROR_FLAG);
 
+  std::cout << std::endl;
+  std::cout << "******************************************************************" << std::endl;
+  std::cout << "*                                                                *" << std::endl;
+  std::cout << "*    OPChooser Version 0.1                                       *" << std::endl;
+  std::cout << "*                                          FE545 Final Project   *" << std::endl;
+  std::cout << "*                                                                *" << std::endl;
+  std::cout << "******************************************************************" << std::endl << std::endl;
+
   try {
 
     po::options_description desc("Allowed options");
@@ -49,6 +57,13 @@ int main(int ac, char* av[]) {
       LOGGER_CONF(vm["output"].as<std::string>(), Logger::file_on, DEBUG_FLAG, DEBUG_FLAG);
     }  
 
+    std::cout << "-----------------------" << std::endl;
+    std::cout << "Ticker:  " << vm["ticker"].as<std::string>() << std::endl;
+    std::cout << "ExpDate: " << vm["date"].as<std::string>()   << std::endl;
+    std::cout << "-----------------------\n" << std::endl;
+
+    std::cout << "Please wait...\n" << std::endl;
+
     OptionCollection optionListCall = GET_OPTIONS(vm["ticker"].as<std::string>(), vm["date"].as<std::string>(), CALL);
     OptionCollection optionListPut = GET_OPTIONS(vm["ticker"].as<std::string>(), vm["date"].as<std::string>(), PUT);
 
@@ -75,7 +90,7 @@ int main(int ac, char* av[]) {
       }
     }
 
-    cout << "============================================" << endl;
+    cout << "\n============================================" << endl;
     cout << "  The optimum portfolio has been selected" << endl;
     it = resultMap.find(max);
     cout << endl;
