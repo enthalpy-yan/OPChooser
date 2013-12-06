@@ -256,7 +256,7 @@ void PosixTestClient::currentTime( long time)
 
 void PosixTestClient::error(const int id, const int errorCode, const IBString errorString)
 {
-	LOGGER(ERROR_FLAG, "Error id=" << id << ",errorCode=" << errorCode << ", msg=" << errorString.c_str());
+	LOGGER(ERROR_FLAG, "Info id=" << id << ",errorCode=" << errorCode << ", msg=" << errorString.c_str());
 	if( id == -1 && errorCode == 1100) // if "Connectivity between IB and TWS has been lost"
 		disconnect();
 }
