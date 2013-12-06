@@ -40,7 +40,7 @@ int main(int ac, char* av[]) {
       ("output,o", po::value<std::string>(), "Set logging output file.")
       ("ticker,t", po::value<std::string>()->required(), "Set the name of ticker.")
       ("date,d", po::value<std::string>()->required(), "Set expiration date for the given ticker.")
-      ("order", "Place an order in IB with the results. (Demo)");
+      ("order,or", "Place an order in IB with the results. (Demo)");
       
     po::variables_map vm;
     po::store(
